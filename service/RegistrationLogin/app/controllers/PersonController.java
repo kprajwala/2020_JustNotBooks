@@ -5,6 +5,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 
 import models.Person;
 import models.PersonRepository;
@@ -16,8 +17,13 @@ import play.mvc.Result;
 import java.io.*;
 import java.sql.*;
 import javax.inject.Inject;
+import javax.persistence.Persistence;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.concurrent.CompletionStage;
+import javax.persistence.NoResultException;
 import java.util.stream.Collectors;
+import javax.persistence.Query;
 
 import static play.libs.Json.toJson;
 
@@ -51,6 +57,9 @@ public class PersonController extends Controller {
             return ok("Insert Successful");
         }, ec.current());
     }
+
+
+
     public CompletionStage<Result> delPerson(String name) {
         return personRepository.del(name).thenApplyAsync(p -> {
             return ok("Delete successful");
@@ -62,29 +71,39 @@ public class PersonController extends Controller {
             return ok(toJson(personStream.collect(Collectors.toList())));
         }, ec.current());
     }
-   //Map<String, String> hm = new HashMap<String, String>();
-    public Result loginValidate() {
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "Admin@123");
-            Statement myStatement = con.createStatement();
-            JsonNode requestJson = request().body().asJson();
-            String username = null;
-            String password = null;
-            if(requestJson.has("name")){
-                username=requestJson.get("name").asText();
-            }
-            if(requestJson.has("pswd")){
-                password=requestJson.get("pswd").asText();
-            }
-            String sql = "select * from project.Person where name='"+username+"' and pswd='"+password+"'";
-            ResultSet rs = myStatement.executeQuery(sql);
-            while (rs.next()) {
-               //if(password=="sri123")
-                    return ok("Login Successful!!");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return ok("Invalid Credentials");
+    public Result valid(String user) {
+        return ok("Hi "+user);
     }
-}
+   //Map<String, String> hm = new HashMap<String, String>();
+    public Result login() {
+        JsonNode j=request().body().asJson();
+        String username=j.get("name").asText();
+        String password=j.get("pswd").asText();
+        Person ps=personRepository.login(username,password);
+       if(ps==null){
+            return ok("Invalid credentials!!");
+        }
+        else{
+            return redirect("personVal/"+ps.name);
+        }
+
+    }
+    public Result profile(){
+        JsonNode j=request().body().asJson();
+        String username=j.get("name").asText();
+
+        /*return personRepository.listuser(username,password).thenApplyAsync(personStream -> {
+            return ok(toJson(personStream.collect(Collectors.toList())));*/
+            Person ps=personRepository.profile(username);
+            if(ps==null){
+                return ok("Invalid credentials!!");
+            }
+            else{
+                String s="{\"email\":\""+ps.email+"\",\"name\":\""+ps.phoneNumber+"\"}";
+
+                return ok(Json.parse(s));
+            }
+
+        }
+    }
+
