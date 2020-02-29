@@ -88,22 +88,51 @@ public class PersonController extends Controller {
         }
 
     }
-    public Result profile(){
-        JsonNode j=request().body().asJson();
-        String username=j.get("name").asText();
+    public Result profile() {
+
+        JsonNode j = request().body().asJson();
+        String name = j.get("name").asText();
 
         /*return personRepository.listuser(username,password).thenApplyAsync(personStream -> {
             return ok(toJson(personStream.collect(Collectors.toList())));*/
-            Person ps=personRepository.profile(username);
-            if(ps==null){
-                return ok("Invalid credentials!!");
-            }
-            else{
-                String s="{\"email\":\""+ps.email+"\",\"name\":\""+ps.phoneNumber+"\"}";
+        Person ps = personRepository.profile(name);
 
-                return ok(Json.parse(s));
-            }
+        if (ps == null) {
+            return ok("Invalid credentials!!");
+        } else {
+            String s="{\"email\":\""+ps.email+"\", \"name\":\""+ps.name+"\",\"phoneNumber\":\""+ps.phoneNumber+"\"}";
+
+            return ok(Json.parse(s));
+        }
+
+    }
+    public CompletionStage<Result> editPerson() {
+        JsonNode j = request().body().asJson();
+        String name = j.get("name").asText();
+        String email = j.get("email").asText();
+        Long phoneNumber = j.get("phoneNumber").asLong();
+        String pswd = j.get("pswd").asText();
+        return personRepository.edit(name,email,phoneNumber,pswd).thenApplyAsync(p -> {
+            return ok("Update successful");
+        }, ec.current());
+    }
+
+    public Result checkName() {
+        JsonNode j = request().body().asJson();
+        String name = j.get("name").asText();
+        Person ps = personRepository.checkName(name);
+
+        if (ps == null) {
+            /*return badRequest("not a valid");*/
+            addPerson();
+            return ok("Insert Successful");
+        } else {
+            String s = "{ \"name\":\"" + ps.name+"\"}";
+            return badRequest(s);
 
         }
+
     }
+
+}
 

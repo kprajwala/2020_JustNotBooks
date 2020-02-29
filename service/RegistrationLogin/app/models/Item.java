@@ -13,11 +13,53 @@ public class Item {
     public String name;
     public String itemName;
     public Integer price;
+    public String image;
     public String description;
     public String category;
-    public Date from;
-    public Date to;
+    public String from2;
+    public String to2;
+    public String address;
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getFrom2() {
+        return from2;
+    }
+
+    public void setFrom2(String from2) {
+        this.from2 = from2;
+    }
+
+    public void setTo2(String to2) {
+        this.to2 = to2;
+    }
+
+    public String getTo2() {
+        return to2;
+    }
+    //Date from=new Date();
+
+    /*public Date getFrom() {
+        return from;
+    }
+
+    public void setFrom(Date from) {
+        this.from = from;
+    }*/
 
     public Long getId() {
         return id;
@@ -27,21 +69,10 @@ public class Item {
         this.id = id;
     }
 
-    public Date getFrom() {
-        return from;
-    }
 
-    public Date getTo() {
-        return to;
-    }
 
-    public void setFrom(Date from) {
-        this.from = from;
-    }
 
-    public void setTo(Date to) {
-        this.to = to;
-    }
+
 
     public int getPrice() {
         return price;

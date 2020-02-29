@@ -14,6 +14,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.lang.Exception;
+import java.sql.*;
 import javax.persistence.NoResultException;
 
 
@@ -45,12 +46,17 @@ public class JPAPersonRepository implements PersonRepository {
 
     @Override
     public CompletionStage<Person> del(String name) {
-        return supplyAsync( () -> wrap(em -> delete(em, name)), executionContext);
+        return supplyAsync(() -> wrap(em -> delete(em, name)), executionContext);
     }
 
     @Override
-    public CompletionStage<Stream<Person>> listuser(String username,String password) {
-        return supplyAsync( () -> wrap(em -> listuser(em, username,password)), executionContext);
+    public CompletionStage<Person> edit(String name, String email, Long phoneNumber, String pswd) {
+        return supplyAsync(() -> wrap(em -> editvalue(em, name, email, phoneNumber, pswd)), executionContext);
+    }
+
+    @Override
+    public CompletionStage<Stream<Person>> listuser(String username, String password) {
+        return supplyAsync(() -> wrap(em -> listuser(em, username, password)), executionContext);
     }
 
     private <T> T wrap(Function<EntityManager, T> function) {
@@ -68,26 +74,36 @@ public class JPAPersonRepository implements PersonRepository {
         return person;
     }
 
+    private Person editvalue(EntityManager em, String name, String email, Long phoneNumber, String pswd) {
+        int i = em.createQuery("update Person SET email=:email,phoneNumber=:phoneNumber,pswd=:pswd where name=:name").setParameter("name", name).setParameter("email", email).setParameter("phoneNumber", phoneNumber).setParameter("pswd", pswd).executeUpdate();
+        //int i=q.executeUpdate();
+        if (i != 0) {
+            Person persons = em.createQuery("select p from Person p where name=:name", Person.class).setParameter("name", name).getSingleResult();
+            return persons;
+        } else {
+            return null;
+        }
+    }
+
     private Stream<Person> list(EntityManager em) {
         List<Person> persons = em.createQuery("select p from Person p", Person.class).getResultList();
         return persons.stream();
     }
 
 
-    private Stream<Person> listuser(EntityManager em,String username,String password){
+    private Stream<Person> listuser(EntityManager em, String username, String password) {
         try {
             List<Person> persons = em.createQuery("select p from Person p where name=:username and pswd=:password", Person.class).setParameter("username", username).setParameter("password", password).getResultList();
             return persons.stream();
 
-        }
-        catch(NoResultException e){
+        } catch (NoResultException e) {
             return null;
         }
 
     }
 
     @Override
-    public Person login(String username,String password) throws NoResultException {
+    public Person login(String username, String password) throws NoResultException {
         try {
             EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("defaultPersistenceUnit");
             EntityManager em = entityManagerFactory.createEntityManager();
@@ -100,23 +116,38 @@ public class JPAPersonRepository implements PersonRepository {
             return null;
         }
     }
-        @Override
-        public Person profile(String username) throws NoResultException {
-            try{
-                EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("defaultPersistenceUnit");
-                EntityManager em= entityManagerFactory.createEntityManager();
-                em.getTransaction().begin();
 
-                Person foundPerson = em.createQuery("select p from Person p where name=:username ",Person.class).setParameter("username", username).getSingleResult();
-                //em.remove(foundPerson);
-                return foundPerson;
-            }
-            catch(NoResultException e){
-                return null;
-            }
+    @Override
+    public Person profile(String name) throws NoResultException {
+        try {
+            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("defaultPersistenceUnit");
+            EntityManager em = entityManagerFactory.createEntityManager();
+            em.getTransaction().begin();
 
-
-
-
+            Person foundPerson = em.createQuery("select p from Person p where name=:name ", Person.class).setParameter("name", name).getSingleResult();
+            //em.remove(foundPerson);
+            return foundPerson;
+        } catch (NoResultException e) {
+            return null;
         }
+
+
+    }
+
+
+    public Person checkName(String name) {
+        try {
+            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("defaultPersistenceUnit");
+            EntityManager em = entityManagerFactory.createEntityManager();
+            em.getTransaction().begin();
+
+            Person PersonProfile = em.createQuery("select p from Person p where name=:name", Person.class).setParameter("name", name).getSingleResult();
+            //em.remove(foundPerson);getSingleResult();
+            //em.remove(foundPerson);
+            return PersonProfile;
+        } catch (NoResultException e) {
+            return null;
+        }
+
+    }
 }

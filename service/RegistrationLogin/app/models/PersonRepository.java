@@ -20,5 +20,7 @@ public interface PersonRepository {
 
     abstract Person login(String username,String password);
     abstract Person profile(String username);
+    public CompletionStage<Person> edit(String name,String email,Long phoneNumber,String pswd);
+    abstract Person checkName(String Name);
 
 }
