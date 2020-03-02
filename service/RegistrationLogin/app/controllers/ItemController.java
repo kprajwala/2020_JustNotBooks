@@ -43,12 +43,38 @@ public class ItemController extends Controller {
     public Result index() {
         return ok(views.html.index.render());
     }
+
+    public CompletionStage<Result> getItems() {
+        return itemRepository.list().thenApplyAsync(itemStream -> {
+            return ok(toJson(itemStream.collect(Collectors.toList())));
+        }, ec.current());
+    }
+
     public CompletionStage<Result> addItem() {
         JsonNode js = request().body().asJson();
         Item item = Json.fromJson(js, Item.class);
         return itemRepository.add(item).thenApplyAsync(p -> {
             //return redirect(routes.PersonController.index());
-            return ok("Insert Successful");
+            String s="{\"id\":"+p.id+"}";
+            return ok(s);
         }, ec.current());
+    }
+
+    public CompletionStage<Result> buy(){
+        JsonNode js = request().body().asJson();
+        String customer = js.get("customer").asText();
+        Long id = js.get("id").asLong();
+        return itemRepository.buyItem(customer,id).thenApplyAsync(ps ->{
+            if (ps != null) {
+                /*return badRequest("not a valid");*/
+                return ok(ps.status);
+            }
+            else {
+
+                return badRequest("cannot Buy");
+
+            }
+        });
+
     }
 }

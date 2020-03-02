@@ -48,5 +48,32 @@ public class JPAItemRepository implements ItemRepository {
         return item;
     }
 
+    @Override
+    public CompletionStage<Stream<Item>> list() {
+        return supplyAsync(() -> wrap(em -> list(em)), executionContext);
+    }
+
+    private Stream<Item> list(EntityManager em) {
+        String s="Available";
+        List<Item> items = em.createQuery("select i from Item i where status=:s", Item.class).setParameter("s",s).getResultList();
+        return items.stream();
+    }
+
+    @Override
+    public CompletionStage<Item> buyItem(String customer,Long id) {
+        return supplyAsync(() -> wrap(em -> buyItems(em, customer,id)), executionContext);
+    }
+
+    private Item buyItems(EntityManager em,String customer,Long id){
+            String s="Unavailable";
+            int foundItem = em.createQuery("update Item SET customer=:customer,status=:s where id=:id").setParameter("customer", customer).setParameter("id", id).setParameter("s", s).executeUpdate();
+        if (foundItem != 0) {
+            Item items = em.createQuery("select p from Item p where id=:id",Item.class).setParameter("id", id).getSingleResult();
+            return items;
+        } else {
+            return null;
+        }
+
+    }
 
 }

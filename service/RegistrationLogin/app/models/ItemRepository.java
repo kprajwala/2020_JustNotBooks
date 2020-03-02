@@ -12,4 +12,6 @@ import java.util.stream.Stream;
 public interface ItemRepository {
 
     CompletionStage<Item> add(Item item);
+    CompletionStage<Item> buyItem(String customer,Long id);
+    CompletionStage<Stream<Item>> list();
 }

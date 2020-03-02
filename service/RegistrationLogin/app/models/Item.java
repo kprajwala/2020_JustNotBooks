@@ -10,7 +10,8 @@ public class Item {
     @GeneratedValue(strategy=GenerationType.AUTO)
     public Long id;
 
-    public String name;
+    public String owner;
+    //public String name;
     public String itemName;
     public Integer price;
     public String image;
@@ -19,6 +20,8 @@ public class Item {
     public String from2;
     public String to2;
     public String address;
+    public String customer;
+    public String status="Available";
 
     public String getAddress() {
         return address;
@@ -105,11 +108,36 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCustomer() {
+        return customer;
     }
 
-    public String getName() {
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+   /*public String getName() {
         return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }*/
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }
