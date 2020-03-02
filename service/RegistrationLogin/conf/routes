@@ -6,12 +6,16 @@
 GET     /                           controllers.PersonController.index()
 POST    /person                     controllers.PersonController.addPerson()
 GET     /persons                    controllers.PersonController.getPersons()
-GET     /details                   controllers.PersonController.profile()
+POST    /details                   controllers.PersonController.profile()
 GET     /personVal/:user            controllers.PersonController.valid(user: String)
 POST     /personVal                  controllers.PersonController.login()
+POST     /check                      controllers.PersonController.checkName()
+POST    /edit                       controllers.PersonController.editPerson()
 
 
+POST    /item                      controllers.ItemController.addItem()
+POST    /buy                      controllers.ItemController.buy()
+GET     /items                   controllers.ItemController.getItems()
 
-POST     /item                      controllers.ItemController.addItem()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
