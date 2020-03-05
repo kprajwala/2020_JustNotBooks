@@ -14,8 +14,13 @@ POST    /edit                       controllers.PersonController.editPerson()
 
 
 POST    /item                      controllers.ItemController.addItem()
-POST    /buy                      controllers.ItemController.buy()
-GET     /items                   controllers.ItemController.getItems()
+POST   /buy                      controllers.ItemController.buy()
+POST    /itemsbuy                   controllers.ItemController.getBuyItems()
+POST    /itemsborrow                   controllers.ItemController.getBorrowItems()
+POST    /itemsdonate                   controllers.ItemController.getDonateItems()
+POST    /itemupload           controllers.ItemController.getItemsUpload()
+POST    /itemtaken          controllers.ItemController.getItemsTaken()
+POST    /delete             controllers.ItemController.delItem()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
