@@ -21,7 +21,6 @@ public class Item {
     public String to2;
     public String address;
     public String customer;
-    //public enum status{Available,Unavailable};
     public String status="Available";
 
     public String getAddress() {
