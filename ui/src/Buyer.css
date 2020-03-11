@@ -1,0 +1,9 @@
+@import "https://www.w3schools.com/w3css/4/w3.css";
+.search{
+    margin-left:45%;
+    width: 50px;
+}
+.Table{
+    background-color: lightslategrey;
+    padding: 10px;
+}

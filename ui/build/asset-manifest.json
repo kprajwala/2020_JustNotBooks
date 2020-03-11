@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/2020_JustNotBooks.github.io/react_spa/static/css/main.9c0871f4.chunk.css",
+    "main.js": "/2020_JustNotBooks.github.io/react_spa/static/js/main.52a3f6ba.chunk.js",
+    "main.js.map": "/2020_JustNotBooks.github.io/react_spa/static/js/main.52a3f6ba.chunk.js.map",
+    "runtime-main.js": "/2020_JustNotBooks.github.io/react_spa/static/js/runtime-main.bc0dcc73.js",
+    "runtime-main.js.map": "/2020_JustNotBooks.github.io/react_spa/static/js/runtime-main.bc0dcc73.js.map",
+    "static/css/2.5ffa1744.chunk.css": "/2020_JustNotBooks.github.io/react_spa/static/css/2.5ffa1744.chunk.css",
+    "static/js/2.db80ae0e.chunk.js": "/2020_JustNotBooks.github.io/react_spa/static/js/2.db80ae0e.chunk.js",
+    "static/js/2.db80ae0e.chunk.js.map": "/2020_JustNotBooks.github.io/react_spa/static/js/2.db80ae0e.chunk.js.map",
+    "index.html": "/2020_JustNotBooks.github.io/react_spa/index.html",
+    "precache-manifest.cdc3e5e4ca5bfd842629a0e447a82242.js": "/2020_JustNotBooks.github.io/react_spa/precache-manifest.cdc3e5e4ca5bfd842629a0e447a82242.js",
+    "service-worker.js": "/2020_JustNotBooks.github.io/react_spa/service-worker.js",
+    "static/css/2.5ffa1744.chunk.css.map": "/2020_JustNotBooks.github.io/react_spa/static/css/2.5ffa1744.chunk.css.map",
+    "static/css/main.9c0871f4.chunk.css.map": "/2020_JustNotBooks.github.io/react_spa/static/css/main.9c0871f4.chunk.css.map",
+    "static/js/2.db80ae0e.chunk.js.LICENSE.txt": "/2020_JustNotBooks.github.io/react_spa/static/js/2.db80ae0e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bc0dcc73.js",
+    "static/css/2.5ffa1744.chunk.css",
+    "static/js/2.db80ae0e.chunk.js",
+    "static/css/main.9c0871f4.chunk.css",
+    "static/js/main.52a3f6ba.chunk.js"
+  ]
+}
