@@ -12,6 +12,7 @@ import Home from "./Home";
 
   import Logout from "./logout"
   import EditItem from "./EditItem"
+import Search from "./Search";
 
 class App extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class App extends React.Component {
               <Route path="/edit" component={Edit}/> 
               <Route path="/logout" component={Logout}/>
               <Route path="/editItem/:id" component={EditItem}/>
+              <Route path="/search" component={Search}/>
        
         </div>
       </BrowserRouter>

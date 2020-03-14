@@ -74,7 +74,7 @@ export class Login extends React.Component {
       
       //window.location.href="/main";
 	  }
-	  else if(response.ok){
+	  else {
 		alert("Invalid Credentials")
     }
  })

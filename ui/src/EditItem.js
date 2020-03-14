@@ -17,8 +17,8 @@ export class EditItem extends React.Component {
       price:'',
       description : '',
       category: '',
-      from2 : null,
-      to2 :null,
+      fromDate : null,
+      toDate :null,
 
     }
    
@@ -72,13 +72,13 @@ export class EditItem extends React.Component {
   }
   handleFromChange=event=>{
     this.setState({
-      from2 : event.target.value
+      fromDate : event.target.value
     });
     
   }
   handleToChange=event=>{
     this.setState({
-      to2 : event.target.value
+      toDate : event.target.value
     });
     
   }
@@ -94,8 +94,8 @@ export class EditItem extends React.Component {
           category:this.state.category,
           address:this.state.address,
           description:this.state.description,
-          from2:this.state.from2,
-          to2:this.state.to2
+          fromDate:this.state.fromDate,
+          toDate:this.state.toDate
         }
         console.log(body);
         
@@ -169,8 +169,8 @@ export class EditItem extends React.Component {
                category:res.data1.category,
                address:res.data1.address,
                description:res.data1.description,
-               from2:res.data1.from2,
-               to2:res.data1.to2
+               fromDate:res.data1.fromDate,
+               toDate:res.data1.toDate
               });
                      
                       
@@ -236,10 +236,10 @@ export class EditItem extends React.Component {
                     From:<input
                             type="date"
                             placeholder="From Date"
-                            name="from2"
-                            id="from2"
+                            name="fromDate"
+                            id="fromDate"
                             min={today}
-                            value={this.state.from2}
+                            value={this.state.fromDate}
                             visibility="hidden"
                             onChange={this.handleFromChange} required
                             
@@ -247,10 +247,10 @@ export class EditItem extends React.Component {
                     <p>  </p>To:<input
                             type="date"
                             placeholder="To Date"
-                            name="to2"
-                            id="to2"
-                            min={this.state.from2}
-                            value={this.state.to2}
+                            name="toDate"
+                            id="toDate"
+                            min={this.state.fromDate}
+                            value={this.state.toDate}
                             visibility="hidden"
                             onChange={this.handleToChange} required
                            

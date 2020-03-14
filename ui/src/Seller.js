@@ -28,41 +28,23 @@ class Seller extends React.Component {
            s:[],
            t:[],
            filter: "",
-    data: [
-      {
-        fname: "Jayne",
-        lname: "Washington",
-        email: "jaynewashington@exposa.com",
-        gender: "female"
-      },
-      {
-        fname: "Peterson",
-        lname: "Dalton",
-        email: "petersondalton@exposa.com",
-        gender: "male"
-      },
-      {
-        fname: "Velazquez",
-        lname: "Calderon",
-        email: "velazquezcalderon@exposa.com",
-        gender: "male"
-      },
-      {
-        fname: "Norman",
-        lname: "Reed",
-        email: "normanreed@exposa.com",
-        gender: "male"
-      }
-    ]
-  }
-
-    
-         
-       }
-       handleChange = event => {
-        this.setState({ filter: event.target.value });
-      };
-    
+           returnedAt:''
+           }
+        var today;
+        today=new Date();
+        var dd = today.getDate(); 
+        var mm = today.getMonth() + 1; 
+  
+        var yyyy = today.getFullYear(); 
+        if (dd < 10) { 
+            dd = '0' + dd; 
+        } 
+        if (mm < 10) { 
+            mm = '0' + mm; 
+        } 
+        this.state.returnedAt = yyyy+'-'+mm+'-'+dd; 
+    }
+      
        handleDelete(owner,id){
 
         var s=this.state.s;
@@ -88,7 +70,7 @@ class Seller extends React.Component {
           })
           .then(response => {
             if(response.ok){
-              //alert(UserProfile.getName())
+              alert("Item deleted Successfully!!")
               window.location.reload(false)
             }
           }) 
@@ -109,10 +91,13 @@ class Seller extends React.Component {
         return s.map((item,id) => {
            //console.log(i,typeof(i))
            if(item.customer==null){
+             let img="/pictures/"+item.image
             return (
+
                 <tr id={id}>
                     
                     <td >{item.itemName}</td>
+                    <td><img src={img} width="200px" height="200px" /></td>
                     <td >{item.price}</td>
                     <td >{item.description}</td>
                     <td >{item.customer}</td>
@@ -126,10 +111,12 @@ class Seller extends React.Component {
     
             }
             else{
+              let img="/pictures/"+item.image
               return (
                 <tr id={id}>
                     
                     <td >{item.itemName}</td>
+                    <td><img src={img} width="200px" height="200px" /></td>
                     <td >{item.price}</td>
                     <td >{item.description}</td>
                     <td >{item.customer}</td>
@@ -143,6 +130,37 @@ class Seller extends React.Component {
         });  
       
     }
+    handleReturn(customer,id)
+    {
+      var s=this.state.s;
+        var body = {
+          customer:customer,
+          id:id,
+          returnedAt:this.state.returnedAt,
+      }
+        const url = 'http://localhost:9000/itemReturn'
+          let headers = new Headers();
+    
+          headers.append('Content-Type', 'application/json');
+          headers.append('Accept', 'application/json');
+    
+          headers.append('Access-Control-Allow-origin', url);
+          headers.append('Access-Control-Allow-Credentials', 'true');
+    
+          headers.append('GET','POST');
+    
+          fetch(url,{
+              headers: headers,
+              method: 'POST',
+              body:JSON.stringify(body)
+          })
+          .then(response => {
+            if(response.ok){
+              alert("Item returned Successfully!!")
+              window.location.reload(false)
+            }
+          }) 
+    }
     renderResultTaken(){
       
       let t=this.state.t
@@ -150,18 +168,42 @@ class Seller extends React.Component {
      
       return t.map((item,id) => {
          //console.log(i,typeof(i))
+         let img="/pictures/"+item.image
+         if(item.category=="borrow")
+         {
           return (
+            <tr id={id}>
+                
+                <td >{item.itemName}</td>
+                <td><img src={img} width="200px" height="200px" /></td>
+                <td >{item.price}</td>
+                <td >{item.description}</td>
+                <td >{item.owner}</td>
+                <td>{item.category}</td>
+                <td >{item.address}</td>
+                <td >{item.status}</td>
+                <td><button onClick={() => this.handleReturn(sessionStorage.getItem("name"),item.id)} > Return </button></td><td></td>
+                 </tr>
+          );
+         }
+          
+          else
+          {
+            return (
               <tr id={id}>
                   
                   <td >{item.itemName}</td>
+                  <td><img src={img} width="200px" height="200px" /></td>
                   <td >{item.price}</td>
                   <td >{item.description}</td>
                   <td >{item.owner}</td>
                   <td>{item.category}</td>
                   <td >{item.address}</td>
                   <td >{item.status}</td>
+
                    </tr>
           );
+          }
       });  
       
 
@@ -189,7 +231,7 @@ class Seller extends React.Component {
         .then(response=>{                
             return response.json()
         }).then(res=>{this.setState({t:res})
-        //console.log(this.state.s) 
+        //console.log(this.state.t) 
     })
         
         
@@ -201,7 +243,7 @@ class Seller extends React.Component {
 
       var body = {
         owner:sessionStorage.getItem("name"),
-    }
+      }
       let headers = new Headers();
       headers.append('Content-Type','application/json');
       headers.append('Accept','application/json');
@@ -219,45 +261,35 @@ class Seller extends React.Component {
           .then(response=>{                
               return response.json()
           }).then(res=>{this.setState({s:res})
-          //console.log(this.state.s) 
+      
       })
           
           
-                  
-  }
+    }
         componentDidMount(){
           this.items()
-          this.taken()}
+          this.taken()
+        }
     
         render() {
-          const { filter, data } = this.state;
-          //const lowercasedFilter = filter.toLowerCase();
-          const filteredData = data.filter(item => {
-            return Object.keys(item).some(key =>
-              item[key].includes(filter)
-            );
-          });
+        
       
             return (
               <div>
              
               <div class="admin">
                 <Nav/>
-              <form className="search">
-              <input
-                placeholder="Search for..."
-                ref={input => this.search = input}
-                onChange={this.handleChange}
-              />
-            </form>
+              
             <h1>Items Uploaded</h1>
             <div className="uploadTable">
                    
                    <div>
                     <table id="product" class="w3-table-all">
                         <th>Name</th>
+                        <th>Image</th>
                         <th>Price</th>
                         <th>Description</th>
+
                         <th>Customer</th>
                         <th>Category</th>
                         <th>Address</th>
@@ -273,6 +305,7 @@ class Seller extends React.Component {
                     
                     <table id="product" class="w3-table-all">
                         <th>Name</th>
+                        <th>Image</th>
                         <th>Price</th>
                         <th>Description</th>
                         <th>Owner</th>

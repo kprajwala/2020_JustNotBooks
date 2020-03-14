@@ -2,6 +2,7 @@ import React from "react";
 import "./upload.css"
 import Nav from "./Nav.js"
 
+var image1;
 export class Upload extends React.Component {
 
   constructor(props) {
@@ -15,8 +16,10 @@ export class Upload extends React.Component {
       price:'',
       description : '',
       category: '',
-      from2 : null,
-      to2 :null,
+      fromDate : null,
+      toDate :null,
+      file:null,
+      uploadedAt:'',
 
     }
     this.handleItemNameChange=this.handleItemNameChange.bind(this)
@@ -30,17 +33,18 @@ export class Upload extends React.Component {
     this.handleImage=this.handleImage.bind(this)
     //this.DateEnabale=this.DateEnabale.bind(this)
     this.state.owner = sessionStorage.getItem("name");
+    this.state.uploadedAt=Date();
     
   }
   
   DateEnable(event){
     if (document.getElementById("borrow").checked) {
-      document.getElementById("from2").style.visibility = 'visible';
-      document.getElementById("to2").style.visibility = 'visible';
+      document.getElementById("fromDate").style.visibility = 'visible';
+      document.getElementById("toDate").style.visibility = 'visible';
   }
   else {
-    document.getElementById('from2').style.visibility = 'hidden';
-    document.getElementById('to2').style.visibility = 'hidden';
+    document.getElementById('fromDate').style.visibility = 'hidden';
+    document.getElementById('toDate').style.visibility = 'hidden';
   }
   
   }
@@ -50,10 +54,13 @@ export class Upload extends React.Component {
     });
     
   }
-  handleImage=event=>{
+  handleImage(event) {
     this.setState({
-      image:event.target.value
+      file: URL.createObjectURL(event.target.files[0])
     });
+    image1=event.target.files[0].name; 
+    //console.log(image1);
+    
   }
   handlePriceChange=event=>{
     this.setState({
@@ -82,13 +89,13 @@ export class Upload extends React.Component {
   }
   handleFromChange=event=>{
     this.setState({
-      from2 : event.target.value
+      fromDate : event.target.value
     });
     
   }
   handleToChange=event=>{
     this.setState({
-      to2 : event.target.value
+      toDate : event.target.value
     });
     
   }
@@ -101,12 +108,13 @@ export class Upload extends React.Component {
         owner:this.state.owner,
         itemName:this.state.itemName,
         price:this.state.price,
-        image:this.state.image,
+        image:image1,
         description : this.state.description,
         address:this.state.address,
         category: this.state.category,
-        from2: this.state.from2,
-        to2 : this.state.to2,
+        fromDate: this.state.fromDate,
+        toDate : this.state.toDate,
+        uploadedAt:this.state.uploadedAt,
     }
 
     console.log(body);
@@ -146,8 +154,8 @@ export class Upload extends React.Component {
     sessionStorage.setItem("description",this.state.description);
     sessionStorage.setItem("address",this.state.address);
     sessionStorage.setItem("category",this.state.category);
-    sessionStorage.setItem("from2",this.state.from2);
-    sessionStorage.setItem("to2",this.state.to2);
+    sessionStorage.setItem("fromDate",this.state.fromDate);
+    sessionStorage.setItem("toDate",this.state.toDate);
 	
                       
  })
@@ -176,13 +184,23 @@ export class Upload extends React.Component {
 							value={this.state.itemName}
 							onChange={this.handleItemNameChange} required
 						/><br></br>
-            Image:<br></br><input 
+            {/* Image:<br></br><input 
               type="file" 
               name="image" 
               id="image" 
               value={this.state.image}
-              onChange={this.handleImage} required
-            /><br></br>
+              onInput={this.handleImage} required
+            /><br></br> */}
+            <div class="fileimages">
+                      <input type="file" onInput={this.handleImage} required/>
+                      <div class="imgfile">
+                      <img class="upload" src={this.state.file2}/>
+                      </div>
+            </div><br/><br/><br/>
+            <br>
+            </br>
+            <br></br>
+            <br></br>
                         Price:
                         <br></br><input
                             type="text"
@@ -227,10 +245,10 @@ export class Upload extends React.Component {
                     From:<input
                             type="date"
                             placeholder="From Date"
-                            name="from2"
-                            id="from2"
+                            name="fromDate"
+                            id="fromDate"
                             min={today}
-                            value={this.state.from2}
+                            value={this.state.fromDate}
                             visibility="hidden"
                             onChange={this.handleFromChange} required
                             
@@ -238,10 +256,10 @@ export class Upload extends React.Component {
                     <p>  </p>To:<input
                             type="date"
                             placeholder="To Date"
-                            name="to2"
-                            id="to2"
-                            min={this.state.from2}
-                            value={this.state.to2}
+                            name="toDate"
+                            id="toDate"
+                            min={this.state.fromDate}
+                            value={this.state.toDate}
                             visibility="hidden"
                             onChange={this.handleToChange} required
                            

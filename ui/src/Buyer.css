@@ -7,3 +7,7 @@
     background-color: lightslategrey;
     padding: 10px;
 }
+tr td{
+    padding-top: 20px;
+    vertical-align: middle;
+  }

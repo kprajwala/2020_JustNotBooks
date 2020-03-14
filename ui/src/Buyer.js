@@ -28,10 +28,22 @@ class Buyer extends React.Component {
            d:[],
            filter: "",
            data:[],
-           st:'buy'
+           st:'buy',
+           takenAt:'',
          }
-    
-         
+        var today;
+        today=new Date();
+        var dd = today.getDate(); 
+        var mm = today.getMonth() + 1; 
+  
+        var yyyy = today.getFullYear(); 
+        if (dd < 10) { 
+            dd = '0' + dd; 
+        } 
+        if (mm < 10) { 
+            mm = '0' + mm; 
+        } 
+        this.state.takenAt = yyyy+'-'+mm+'-'+dd; 
        }
     
    
@@ -41,6 +53,7 @@ class Buyer extends React.Component {
       var body = {
         customer:customer,
         id:id,
+        takenAt:this.state.takenAt
     }
       const url = 'http://localhost:9000/buy'
         let headers = new Headers();
@@ -60,19 +73,39 @@ class Buyer extends React.Component {
         })
         .then(response => {
           if(response.ok){
-            //alert(UserProfile.getName())
+            
+            const templateId = 'template_Ne4ypnOa';
+            this.sendFeedback(templateId, {message_html: "Thank you for purchasing!!", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+            alert("Thank you for purchasing!!")
             window.location.reload(false)
           }
         }) 
-  
-  
+        
     }
-    handleBorrow(customer,id){
+    sendFeedback (templateId, variables) {
+      window.emailjs.send(
+        'gmail', templateId,
+        variables
+        ).then(res => {
+          console.log('Email successfully sent!')
+        })
+        // Handle errors here however you like, or use a React error boundary
+        .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+      }
 
-      var s=this.state.s;
+    handleBorrow(customer,id,fromDate){
+
+      if(this.state.takenAt<fromDate)
+      {
+        alert("Cannot Borrow as it is unavailable for now!!");
+      }
+      else{
+
+        var s=this.state.s;
       var body = {
         customer:customer,
         id:id,
+        takenAt:this.state.takenAt
     }
       const url = 'http://localhost:9000/borrow'
         let headers = new Headers();
@@ -92,10 +125,14 @@ class Buyer extends React.Component {
         })
         .then(response => {
           if(response.ok){
-            //alert(UserProfile.getName())
+            const templateId = 'template_Ne4ypnOa';
+            this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+            alert("Thanks for Borrowing!! Return on time is appreciated..")
             window.location.reload(false)
           }
         }) 
+      }
+      
   
   
     }
@@ -107,10 +144,12 @@ class Buyer extends React.Component {
        
         return s.map((item,id) => {
            //console.log(i,typeof(i))
+           let img="/pictures/"+item.image
             return (
                 <tr id={id}>
                     
                     <td >{item.itemName}</td>
+                    <td><img src={img} width="200px" height="200px" /></td>
                     <td >{item.price}</td>
                     <td >{item.description}</td>
                     <td >{item.owner}</td>
@@ -129,19 +168,7 @@ class Buyer extends React.Component {
           return (
             <div class="admin">
             <Nav/>
-          {/* <form className="search">
-          <div>
-              <input value={filter} onChange={this.handleChange} />
-              {filteredData.map(item => (
-                <div key={item.email}>
-                  <div>
-                    {item.fname} {item.lname} - {item.gender} - {item.email}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-        </form> */}
+      
 
         <button onClick={()=>{this.setState({st:"buy"})}} > Buy </button>
         <button onClick={()=>{this.setState({st:"borrow"})}} > Borrow </button>
@@ -151,6 +178,7 @@ class Buyer extends React.Component {
                    <div className='Table'>
                    <table id="product" class="w3-table-all">
                       <th>Name</th>
+                      <th>Image</th>
                       <th>Price</th>
                       <th>Description</th>
                       <th>Owner</th>
@@ -171,20 +199,7 @@ class Buyer extends React.Component {
       return (
         <div class="admin">
         <Nav/>
-      {/* <form className="search">
-      <div>
-          <input value={filter} onChange={this.handleChange} />
-          {filteredData.map(item => (
-            <div key={item.email}>
-              <div>
-                {item.fname} {item.lname} - {item.gender} - {item.email}
-              </div>
-            </div>
-          ))}
-        </div>
-
-    </form> */}
-
+    
     <button onClick={()=>{this.setState({st:"buy"})}} > Buy </button>
     <button onClick={()=>{this.setState({st:"borrow"})}} > Borrow </button>
     <button onClick={()=>{this.setState({st:"donate"})}} > Donation </button>
@@ -193,6 +208,7 @@ class Buyer extends React.Component {
            <div className='Table'>
            <table id="product" class="w3-table-all">
                 <th>Name</th>
+                <th>Image</th>
                 <th>Price</th>
                 <th>Description</th>
                 <th>Owner</th>
@@ -218,19 +234,21 @@ class Buyer extends React.Component {
         
           return b.map((item,id) => {
             //console.log(i,typeof(i))
+            let img="/pictures/"+item.image
               return (
                   <tr id={id}>
                       
                       <td >{item.itemName}</td>
+                      <td><img src={img} width="200px" height="200px" /></td>
                       <td >{item.price}</td>
                       <td >{item.description}</td>
                       <td >{item.owner}</td>
-                      <td >{item.from2}</td>
-                      <td >{item.to2}</td>
+                      <td >{item.fromDate}</td>
+                      <td >{item.toDate}</td>
                       <td>{item.category}</td>
                       <td >{item.address}</td>
                       <td >{item.status}</td>
-                      <td><button onClick={() => this.handleBorrow(sessionStorage.getItem("name"),item.id)} > Borrow </button></td>
+                      <td><button onClick={() => this.handleBorrow(sessionStorage.getItem("name"),item.id,item.fromDate)} > Borrow </button></td>
                       </tr>
               );
           });  
@@ -243,19 +261,7 @@ class Buyer extends React.Component {
           return (
             <div class="admin">
             <Nav/>
-          {/* <form className="search">
-          <div>
-              <input value={filter} onChange={this.handleChange} />
-              {filteredData.map(item => (
-                <div key={item.email}>
-                  <div>
-                    {item.fname} {item.lname} - {item.gender} - {item.email}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-              </form> */}
+         
 
         <button onClick={()=>{this.setState({st:"buy"})}} > Buy </button>
         <button onClick={()=>{this.setState({st:"borrow"})}} > Borrow </button>
@@ -266,6 +272,7 @@ class Buyer extends React.Component {
               <div className='Table'>
               <table id="product" class="w3-table-all">
                     <th>Name</th>
+                    <th>Image</th>
                     <th>Price</th>
                     <th>Description</th>
                     <th>Owner</th>
@@ -289,10 +296,12 @@ class Buyer extends React.Component {
    
     return d.map((item,id) => {
        //console.log(i,typeof(i))
+       let img="/pictures/"+item.image
         return (
             <tr id={id}>
                 
                 <td >{item.itemName}</td>
+                <td><img src={img} width="200px" height="200px" /></td>
                 <td >{item.price}</td>
                 <td >{item.description}</td>
                 <td >{item.owner}</td>
@@ -406,13 +415,7 @@ donate(){
       
     
         render() {
-          const { filter, data } = this.state;
-          const lowercasedFilter = filter.toLowerCase();
-          const filteredData = data.filter(item => {
-            return Object.keys(item).some(key =>
-              item[key].toLowerCase().includes(lowercasedFilter)
-            );
-          });
+          
           
            if(this.state.st=="donate")
            {

@@ -124,3 +124,6 @@ td{
 .p{
   float:right;
 }
+tr{
+  padding-top: 20px;
+}
