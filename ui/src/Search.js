@@ -60,6 +60,8 @@ class Search extends React.Component {
           })
           .then(response => {
             if(response.ok){
+              const templateId = 'template_Ne4ypnOa';
+            this.sendFeedback(templateId, {message_html: "Thank you for purchasing!!", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
               alert("Thank you for Purchasing!!")
               window.location.reload(false)
             }
@@ -67,6 +69,16 @@ class Search extends React.Component {
     
     
       }
+      sendFeedback (templateId, variables) {
+        window.emailjs.send(
+          'gmail', templateId,
+          variables
+          ).then(res => {
+            console.log('Email successfully sent!')
+          })
+          // Handle errors here however you like, or use a React error boundary
+          .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+        }
      
       handleBorrow(customer,id){
 
@@ -93,6 +105,8 @@ class Search extends React.Component {
           })
           .then(response => {
             if(response.ok){
+              const templateId = 'template_Ne4ypnOa';
+            this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
               alert("Thanks for Borrowing!! Return on time is appreciated..")
               window.location.reload(false)
             }
