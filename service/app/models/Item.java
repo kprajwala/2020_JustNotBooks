@@ -14,14 +14,23 @@ public class Item {
     //public String name;
     public String itemName;
     public Integer price;
+    public String customer;
     public String image;
     public String description;
     public String category;
-    public String from2;
-    public String to2;
+    public String fromDate;
+    public String toDate;
     public String address;
-    public String customer;
     public String status="Available";
+    public String uploadedAt;
+
+    public void setUploadedAt(String uploadedAt) {
+        this.uploadedAt = uploadedAt;
+    }
+
+    public String getUploadedAt() {
+        return uploadedAt;
+    }
 
     public String getAddress() {
         return address;
@@ -39,20 +48,20 @@ public class Item {
         this.image = image;
     }
 
-    public String getFrom2() {
-        return from2;
+    public String getFromDate() {
+        return fromDate;
     }
 
-    public void setFrom2(String from2) {
-        this.from2 = from2;
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
     }
 
-    public void setTo2(String to2) {
-        this.to2 = to2;
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
     }
 
-    public String getTo2() {
-        return to2;
+    public String getToDate() {
+        return toDate;
     }
     //Date from=new Date();
 
@@ -108,13 +117,6 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public String getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
 
     public String getOwner() {
         return owner;

@@ -94,7 +94,8 @@ public class ItemController extends Controller {
         JsonNode js = request().body().asJson();
         String customer = js.get("customer").asText();
         Long id = js.get("id").asLong();
-        return itemRepository.buyItem(customer,id).thenApplyAsync(ps ->{
+        String takenAt=js.get("takenAt").asText();
+        return itemRepository.buyItem(customer,id,takenAt).thenApplyAsync(ps ->{
             if (ps != null) {
                 /*return badRequest("not a valid");*/
                 return ok(" "+ps.owner);
@@ -151,12 +152,66 @@ public class ItemController extends Controller {
         Item ps = itemRepository.details(id);
 
         if (ps == null) {
-            return ok("Invalid credentials!!");
+            return badRequest("Invalid credentials!!");
         } else {
-            String s = "{\"itemName\":\"" + ps.itemName + "\", \"price\":\"" + ps.price + "\",\"category\":\"" + ps.category + "\",\"address\":\"" + ps.address + "\",\"description\":\"" + ps.description + "\",\"from2\":\"" + ps.from2 + "\",\"to2\":\"" + ps.to2 + "\"}";
+            String s = "{\"itemName\":\"" + ps.itemName + "\", \"price\":\"" + ps.price + "\",\"category\":\"" + ps.category + "\",\"address\":\"" + ps.address + "\",\"description\":\"" + ps.description + "\",\"fromDate\":\"" + ps.fromDate + "\",\"toDate\":\"" + ps.toDate + "\"}";
 
             return ok(Json.parse(s));
         }
+
+    }
+
+    public CompletionStage<Result> search(){
+        JsonNode j = request().body().asJson();
+        String search = j.get("search").asText();
+        String owner = j.get("owner").asText();
+        //Stream<Item> ps=itemRepository.getSearchItems(search);
+        return itemRepository.getSearchItems(search,owner).thenApplyAsync(ps ->{
+            if (ps == null) {
+                return badRequest("No results Found");
+            } else {
+                // String s="{\"email\":\""+ps.email+"\", \"name\":\""+ps.name+"\",\"phoneNumber\":\""+ps.phoneNumber+"\"}";
+
+                return ok(Json.toJson(ps));
+            }
+        });
+
+    }
+
+    public CompletionStage<Result> borrow(){
+        JsonNode js = request().body().asJson();
+        String customer = js.get("customer").asText();
+        Long id = js.get("id").asLong();
+        String takenAt=js.get("takenAt").asText();
+        return itemRepository.borrowItem(customer,id,takenAt).thenApplyAsync(ps ->{
+            if (ps != null) {
+                /*return badRequest("not a valid");*/
+                return ok(" "+ps.owner);
+            }
+            else {
+
+                return badRequest("cannot Borrow");
+
+            }
+        });
+
+    }
+    public CompletionStage<Result> returnItem(){
+        JsonNode js = request().body().asJson();
+        String customer = js.get("customer").asText();
+        Long id = js.get("id").asLong();
+        String returnedAt=js.get("returnedAt").asText();
+        return itemRepository.returnItem(customer,id,returnedAt).thenApplyAsync(ps ->{
+            if (ps != null) {
+                /*return badRequest("not a valid");*/
+                return ok(" "+ps.owner);
+            }
+            else {
+
+                return badRequest("cannot Return");
+
+            }
+        });
 
     }
 }

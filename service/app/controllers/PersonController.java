@@ -81,7 +81,7 @@ public class PersonController extends Controller {
         String password=j.get("pswd").asText();
         Person ps=personRepository.login(username,password);
        if(ps==null){
-            return ok("Invalid credentials!!");
+            return badRequest("Invalid credentials!!");
         }
         else{
             return redirect("personVal/"+ps.name);
@@ -98,11 +98,11 @@ public class PersonController extends Controller {
         Person ps = personRepository.profile(name);
 
         if (ps == null) {
-            return ok("Invalid credentials!!");
+            return badRequest("Invalid credentials!!");
         } else {
             String s="{\"email\":\""+ps.email+"\", \"name\":\""+ps.name+"\",\"phoneNumber\":\""+ps.phoneNumber+"\"}";
 
-            return ok(Json.parse(s));
+            return ok(Json.toJson(ps));
         }
 
     }

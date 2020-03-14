@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/Users/macadmin/Desktop/sample/RegistrationLogin/conf/routes
-// @DATE:Tue Mar 10 13:59:11 IST 2020
+// @SOURCE:/Users/macadmin/2020_JustNotBooks/service/conf/routes
+// @DATE:Sat Mar 14 11:56:07 IST 2020
 
 import play.api.mvc.Call
 
@@ -17,34 +17,52 @@ package controllers {
     }
 
   
-    // @LINE:18
+    // @LINE:19
     def getBuyItems(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "itemsbuy")
     }
   
-    // @LINE:25
+    // @LINE:26
     def itemDetails(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "itemDetails")
     }
   
-    // @LINE:19
+    // @LINE:20
     def getBorrowItems(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "itemsborrow")
     }
   
-    // @LINE:22
+    // @LINE:28
+    def returnItem(): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "itemReturn")
+    }
+  
+    // @LINE:23
     def getItemsTaken(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "itemtaken")
     }
   
-    // @LINE:23
+    // @LINE:24
     def delItem(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "delete")
+    }
+  
+    // @LINE:18
+    def borrow(): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "borrow")
+    }
+  
+    // @LINE:27
+    def search(): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "search")
     }
   
     // @LINE:17
@@ -53,19 +71,19 @@ package controllers {
       Call("POST", _prefix + { _defaultPrefix } + "buy")
     }
   
-    // @LINE:20
+    // @LINE:21
     def getDonateItems(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "itemsdonate")
     }
   
-    // @LINE:24
+    // @LINE:25
     def editItem(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "editItem")
     }
   
-    // @LINE:21
+    // @LINE:22
     def getItemsUpload(): Call = {
       
       Call("POST", _prefix + { _defaultPrefix } + "itemupload")
@@ -136,17 +154,32 @@ package controllers {
   
   }
 
-  // @LINE:27
+  // @LINE:35
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:27
+    // @LINE:35
     def at(file:String): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[String]].unbind("file", file))
+    }
+  
+  }
+
+  // @LINE:32
+  class ReverseTransactionController(_prefix: => String) {
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:32
+    def addTransaction(trans:String): Call = {
+      
+      Call("POST", _prefix + { _defaultPrefix } + "transaction" + play.core.routing.queryString(List(Some(implicitly[play.api.mvc.QueryStringBindable[String]].unbind("trans", trans)))))
     }
   
   }

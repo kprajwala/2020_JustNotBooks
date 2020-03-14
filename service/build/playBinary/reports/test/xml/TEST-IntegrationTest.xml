@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="IntegrationTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-03-11T08:46:19" hostname="jyosnas-imac.local" time="2.226">
+  <properties/>
+  <testcase name="testInServerThroughApp" classname="IntegrationTest" time="0.647"/>
+  <testcase name="testInServerThroughUrl" classname="IntegrationTest" time="0.852"/>
+  <testcase name="testInServerThroughApp" classname="IntegrationTest" time="0.255"/>
+  <testcase name="testInServerThroughUrl" classname="IntegrationTest" time="0.232"/>
+  <system-out><![CDATA[[?[37minfo?[0m] application - Creating Pool for datasource 'default'
+[?[33mwarn?[0m] c.z.h.u.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+[?[37minfo?[0m] p.a.d.HikariCPConnectionPool - datasource [default] bound to JNDI as DefaultDS
+[?[33mwarn?[0m] o.h.v.m.ParameterMessageInterpolator - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+[?[37minfo?[0m] application - Shutting down connection pool.
+[?[37minfo?[0m] application - Creating Pool for datasource 'default'
+[?[33mwarn?[0m] c.z.h.u.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+[?[37minfo?[0m] p.a.d.HikariCPConnectionPool - datasource [default] bound to JNDI as DefaultDS
+[?[33mwarn?[0m] o.h.v.m.ParameterMessageInterpolator - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+[?[37minfo?[0m] application - Shutting down connection pool.
+[?[37minfo?[0m] application - Creating Pool for datasource 'default'
+[?[33mwarn?[0m] c.z.h.u.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+[?[37minfo?[0m] p.a.d.HikariCPConnectionPool - datasource [default] bound to JNDI as DefaultDS
+[?[33mwarn?[0m] o.h.v.m.ParameterMessageInterpolator - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+[?[37minfo?[0m] application - Shutting down connection pool.
+[?[37minfo?[0m] application - Creating Pool for datasource 'default'
+[?[33mwarn?[0m] c.z.h.u.DriverDataSource - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+[?[37minfo?[0m] p.a.d.HikariCPConnectionPool - datasource [default] bound to JNDI as DefaultDS
+[?[33mwarn?[0m] o.h.v.m.ParameterMessageInterpolator - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+[?[37minfo?[0m] application - Shutting down connection pool.
+]]></system-out>
+  <system-err><![CDATA[Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+]]></system-err>
+</testsuite>

@@ -61,8 +61,8 @@ Seq[Any](format.raw/*1.32*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Thu Feb 06 12:16:54 IST 2020
-                  SOURCE: /Users/macadmin/Desktop/sample/RegistrationLogin/app/views/main.scala.html
+                  DATE: Wed Mar 11 12:46:49 IST 2020
+                  SOURCE: /Users/macadmin/2020_JustNotBooks/service/app/views/main.scala.html
                   HASH: 19dc28ded525fc3188f28d69896355eca8c606f8
                   MATRIX: 971->1|1096->31|1124->33|1201->84|1226->89|1319->156|1333->162|1385->194|1436->219|1450->225|1515->270|1609->337|1637->344|1669->349
                   LINES: 29->1|34->1|36->3|40->7|40->7|41->8|41->8|41->8|42->9|42->9|42->9|45->12|45->12|46->13

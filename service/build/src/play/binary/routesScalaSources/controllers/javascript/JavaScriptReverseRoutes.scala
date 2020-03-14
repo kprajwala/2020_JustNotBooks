@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/Users/macadmin/Desktop/sample/RegistrationLogin/conf/routes
-// @DATE:Tue Mar 10 13:59:11 IST 2020
+// @SOURCE:/Users/macadmin/2020_JustNotBooks/service/conf/routes
+// @DATE:Sat Mar 14 11:56:07 IST 2020
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -18,7 +18,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:18
+    // @LINE:19
     def getBuyItems: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ItemController.getBuyItems",
       """
@@ -28,7 +28,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:25
+    // @LINE:26
     def itemDetails: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ItemController.itemDetails",
       """
@@ -38,7 +38,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:19
+    // @LINE:20
     def getBorrowItems: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ItemController.getBorrowItems",
       """
@@ -48,7 +48,17 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:22
+    // @LINE:28
+    def returnItem: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ItemController.returnItem",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "itemReturn"})
+        }
+      """
+    )
+  
+    // @LINE:23
     def getItemsTaken: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ItemController.getItemsTaken",
       """
@@ -58,12 +68,32 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:23
+    // @LINE:24
     def delItem: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ItemController.delItem",
       """
         function() {
           return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "delete"})
+        }
+      """
+    )
+  
+    // @LINE:18
+    def borrow: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ItemController.borrow",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "borrow"})
+        }
+      """
+    )
+  
+    // @LINE:27
+    def search: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.ItemController.search",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "search"})
         }
       """
     )
@@ -78,7 +108,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:20
+    // @LINE:21
     def getDonateItems: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ItemController.getDonateItems",
       """
@@ -88,7 +118,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:24
+    // @LINE:25
     def editItem: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ItemController.editItem",
       """
@@ -98,7 +128,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:21
+    // @LINE:22
     def getItemsUpload: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.ItemController.getItemsUpload",
       """
@@ -210,7 +240,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:27
+  // @LINE:35
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -218,12 +248,32 @@ package controllers.javascript {
     }
 
   
-    // @LINE:27
+    // @LINE:35
     def at: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.at",
       """
         function(file1) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "assets/" + (""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("file", file1)})
+        }
+      """
+    )
+  
+  }
+
+  // @LINE:32
+  class ReverseTransactionController(_prefix: => String) {
+
+    def _defaultPrefix: String = {
+      if (_prefix.endsWith("/")) "" else "/"
+    }
+
+  
+    // @LINE:32
+    def addTransaction: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.TransactionController.addTransaction",
+      """
+        function(trans0) {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "transaction" + _qS([(""" + implicitly[play.api.mvc.QueryStringBindable[String]].javascriptUnbind + """)("trans", trans0)])})
         }
       """
     )

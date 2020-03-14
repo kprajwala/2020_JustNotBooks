@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/Users/macadmin/Desktop/sample/RegistrationLogin/conf/routes
-// @DATE:Tue Mar 10 13:59:11 IST 2020
+// @SOURCE:/Users/macadmin/2020_JustNotBooks/service/conf/routes
+// @DATE:Sat Mar 14 11:56:07 IST 2020
 
 
 package router {

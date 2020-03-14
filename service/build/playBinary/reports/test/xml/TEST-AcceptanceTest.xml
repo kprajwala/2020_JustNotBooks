@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="AcceptanceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-03-11T08:46:13" hostname="jyosnas-imac.local" time="8.267">
+  <properties/>
+  <testcase name="test" classname="AcceptanceTest" time="5.477"/>
+  <testcase name="test" classname="AcceptanceTest" time="0.239"/>
+  <system-out><![CDATA[[?[37minfo?[0m] application - Creating Pool for datasource 'default'
+[?[37minfo?[0m] p.a.d.HikariCPConnectionPool - datasource [default] bound to JNDI as DefaultDS
+[?[33mwarn?[0m] o.h.v.m.ParameterMessageInterpolator - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+Hibernate: create table hibernate_sequence (next_val bigint) engine=InnoDB
+Hibernate: insert into hibernate_sequence values ( 1 )
+Hibernate: insert into hibernate_sequence values ( 1 )
+Hibernate: create table Item (id bigint not null, address varchar(255), category varchar(255), customer varchar(255), description varchar(255), from2 varchar(255), image varchar(255), itemName varchar(255), owner varchar(255), price integer, status varchar(255), to2 varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table Person (id bigint not null, email varchar(255), name varchar(255), phoneNumber bigint, pswd varchar(255), primary key (id)) engine=InnoDB
+[?[37minfo?[0m] application - Shutting down connection pool.
+[?[37minfo?[0m] application - Creating Pool for datasource 'default'
+[?[37minfo?[0m] p.a.d.HikariCPConnectionPool - datasource [default] bound to JNDI as DefaultDS
+[?[33mwarn?[0m] o.h.v.m.ParameterMessageInterpolator - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+Hibernate: create table hibernate_sequence (next_val bigint) engine=InnoDB
+Hibernate: insert into hibernate_sequence values ( 1 )
+Hibernate: insert into hibernate_sequence values ( 1 )
+Hibernate: create table Item (id bigint not null, address varchar(255), category varchar(255), customer varchar(255), description varchar(255), from2 varchar(255), image varchar(255), itemName varchar(255), owner varchar(255), price integer, status varchar(255), to2 varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table Person (id bigint not null, email varchar(255), name varchar(255), phoneNumber bigint, pswd varchar(255), primary key (id)) engine=InnoDB
+[?[37minfo?[0m] application - Shutting down connection pool.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

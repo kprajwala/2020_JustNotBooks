@@ -59,8 +59,8 @@ Seq[Any](format.raw/*1.4*/("""
 
               /*
                   -- GENERATED --
-                  DATE: Thu Feb 06 12:16:54 IST 2020
-                  SOURCE: /Users/macadmin/Desktop/sample/RegistrationLogin/app/views/index.scala.html
+                  DATE: Wed Mar 11 12:46:49 IST 2020
+                  SOURCE: /Users/macadmin/2020_JustNotBooks/service/app/views/index.scala.html
                   HASH: 0032e4d7e5b1fe20c18c5f8374fa8ca171d61e83
                   MATRIX: 960->1|1056->3|1084->6|1115->29|1154->31|1185->36|1248->73|1262->79|1316->113|1416->187|1430->193|1479->222|1602->315
                   LINES: 29->1|34->1|36->3|36->3|36->3|37->4|37->4|37->4|37->4|41->8|41->8|41->8|45->12

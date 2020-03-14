@@ -25,6 +25,7 @@ import static java.util.concurrent.CompletableFuture.supplyAsync;
  */
 public class JPAPersonRepository implements PersonRepository {
 
+
     private final JPAApi jpaApi;
     private final DatabaseExecutionContext executionContext;
 
@@ -58,6 +59,8 @@ public class JPAPersonRepository implements PersonRepository {
     public CompletionStage<Stream<Person>> listuser(String username, String password) {
         return supplyAsync(() -> wrap(em -> listuser(em, username, password)), executionContext);
     }
+
+
 
     private <T> T wrap(Function<EntityManager, T> function) {
         return jpaApi.withTransaction(function);
@@ -103,27 +106,27 @@ public class JPAPersonRepository implements PersonRepository {
     }
 
     @Override
-    public Person login(String username, String password) throws NoResultException {
-        try {
-            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("defaultPersistenceUnit");
-            EntityManager em = entityManagerFactory.createEntityManager();
-            em.getTransaction().begin();
+    public Person login(String username, String password) {
+        return wrap(em -> findPerson(em, username, password));
+    }
 
+    private Person findPerson(EntityManager em, String username, String password) throws NoResultException {
+        try {
             Person foundPerson = em.createQuery("select p from Person p where name=:username and pswd=:password", Person.class).setParameter("username", username).setParameter("password", password).getSingleResult();
-            //em.remove(foundPerson);
             return foundPerson;
-        } catch (NoResultException e) {
+        }
+        catch(NoResultException e){
             return null;
         }
     }
 
     @Override
-    public Person profile(String name) throws NoResultException {
-        try {
-            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("defaultPersistenceUnit");
-            EntityManager em = entityManagerFactory.createEntityManager();
-            em.getTransaction().begin();
+    public Person profile(String name) {
+        return wrap(em -> profile(em, name));
+    }
 
+    private Person profile(EntityManager em,String name) throws NoResultException {
+        try {
             Person foundPerson = em.createQuery("select p from Person p where name=:name ", Person.class).setParameter("name", name).getSingleResult();
             //em.remove(foundPerson);
             return foundPerson;
@@ -135,12 +138,13 @@ public class JPAPersonRepository implements PersonRepository {
     }
 
 
+    @Override
     public Person checkName(String name) {
-        try {
-            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("defaultPersistenceUnit");
-            EntityManager em = entityManagerFactory.createEntityManager();
-            em.getTransaction().begin();
+        return wrap(em -> checkName(em, name));
+    }
 
+    private Person checkName(EntityManager em,String name) {
+        try {
             Person PersonProfile = em.createQuery("select p from Person p where name=:name", Person.class).setParameter("name", name).getSingleResult();
             //em.remove(foundPerson);getSingleResult();
             //em.remove(foundPerson);
