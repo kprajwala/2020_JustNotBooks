@@ -36,12 +36,12 @@ export class EditItem extends React.Component {
   
   DateEnable(event){
     if (document.getElementById("borrow").checked) {
-      document.getElementById("from2").style.visibility = 'visible';
-      document.getElementById("to2").style.visibility = 'visible';
+      document.getElementById("fromDate").style.visibility = 'visible';
+      document.getElementById("toDate").style.visibility = 'visible';
   }
   else {
-    document.getElementById('from2').style.visibility = 'hidden';
-    document.getElementById('to2').style.visibility = 'hidden';
+    document.getElementById('fromDate').style.visibility = 'hidden';
+    document.getElementById('toDate').style.visibility = 'hidden';
   }
   
   }
@@ -117,7 +117,7 @@ export class EditItem extends React.Component {
             method: 'POST',
             body: JSON.stringify(body)
             })
-            .then(response => response.json())
+            .then(response => response.text())
             .then(contents => {console.log(contents);
                             
         })

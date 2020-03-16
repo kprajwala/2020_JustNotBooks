@@ -20,7 +20,7 @@ public interface ItemRepository {
     CompletionStage<Stream<Item>> listDonate(String owner);
     CompletionStage<Stream<Item>> listUploaded(String owner);
     CompletionStage<Stream<Item>> listTaken(String customer);
-    public CompletionStage<Item> edit(Long id,Integer price,String description,String address,String category);
+    public CompletionStage<Item> edit(Long id,Integer price,String description,String address,String category,String fromDate,String toDate);
     CompletionStage<Item> del(String owner,Long id);
     public Item details(Long id);
     public CompletionStage<Stream<Item>> getSearchItems(String search, String owner);

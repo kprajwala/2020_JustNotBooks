@@ -76,7 +76,7 @@ public class JPAItemRepository implements ItemRepository {
         LocalDate today = LocalDate.now();
 
         String t=today.toString();
-        System.out.println("Today's Local date : " + t);
+        //System.out.println("Today's Local date : " + t);
         List<Item> items = em.createQuery("select i from Item i where status=:s and not owner=:owner and category=:cat and fromDate<=: t and toDate>=: t", Item.class).setParameter("t",t).setParameter("s",s).setParameter("owner",owner).setParameter("cat",cat).getResultList();
         return items.stream();
     }
@@ -147,13 +147,13 @@ public class JPAItemRepository implements ItemRepository {
     }
 
     @Override
-    public CompletionStage<Item> edit(Long id,Integer price,String description,String address,String category) {
-        return supplyAsync(() -> wrap(em -> editvalue(em, id, price,description,address,category)), executionContext);
+    public CompletionStage<Item> edit(Long id,Integer price,String description,String address,String category,String fromDate,String toDate) {
+        return supplyAsync(() -> wrap(em -> editvalue(em, id, price,description,address,category,fromDate,toDate)), executionContext);
     }
 
-    private Item editvalue(EntityManager em, Long id, Integer price,String description,String address,String category) {
+    private Item editvalue(EntityManager em, Long id, Integer price,String description,String address,String category,String fromDate,String toDate) {
         String status="Available";
-        int i = em.createQuery("update Item SET price=:price,description=:description,address=:address,category=:category where id=:id and status=:status").setParameter("id", id).setParameter("price", price).setParameter("address", address).setParameter("description", description).setParameter("category", category).setParameter("status", status).executeUpdate();
+        int i = em.createQuery("update Item SET price=:price,description=:description,address=:address,category=:category,fromDate=:fromDate,toDate=:toDate where id=:id and status=:status").setParameter("fromDate", fromDate).setParameter("toDate", toDate).setParameter("id", id).setParameter("price", price).setParameter("address", address).setParameter("description", description).setParameter("category", category).setParameter("status", status).executeUpdate();
         //int i=q.executeUpdate();
         if (i != 0) {
             Item items = em.createQuery("select i from Item i where id=:id", Item.class).setParameter("id", id).getSingleResult();

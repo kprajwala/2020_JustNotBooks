@@ -13,6 +13,7 @@ import Home from "./Home";
   import Logout from "./logout"
   import EditItem from "./EditItem"
 import Search from "./Search";
+import Notification from "./Notification"
 
 class App extends React.Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class App extends React.Component {
               <Route path="/logout" component={Logout}/>
               <Route path="/editItem/:id" component={EditItem}/>
               <Route path="/search" component={Search}/>
+              <Route path="/notification" component={Notification}/>
        
         </div>
       </BrowserRouter>

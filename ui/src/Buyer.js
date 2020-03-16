@@ -76,6 +76,8 @@ class Buyer extends React.Component {
             
             const templateId = 'template_Ne4ypnOa';
             this.sendFeedback(templateId, {message_html: "Thank you for purchasing!!", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+            var note="Thank you for purchasing!!"
+            sessionStorage.setItem("notification",note)
             alert("Thank you for purchasing!!")
             window.location.reload(false)
           }
@@ -126,7 +128,7 @@ class Buyer extends React.Component {
         .then(response => {
           if(response.ok){
             const templateId = 'template_Ne4ypnOa';
-            this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+            //this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
             alert("Thanks for Borrowing!! Return on time is appreciated..")
             window.location.reload(false)
           }

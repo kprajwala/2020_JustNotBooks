@@ -28,7 +28,9 @@ class Seller extends React.Component {
            s:[],
            t:[],
            filter: "",
-           returnedAt:''
+           returnedAt:'',
+           customerNote:'',
+           ownerNote:''
            }
         var today;
         today=new Date();
@@ -100,12 +102,14 @@ class Seller extends React.Component {
                     <td><img src={img} width="200px" height="200px" /></td>
                     <td >{item.price}</td>
                     <td >{item.description}</td>
+                    <td>{item.fromDate}</td>
+                    <td>{item.toDate}</td>
                     <td >{item.customer}</td>
                     <td>{item.category}</td>
                     <td >{item.address}</td>
                     <td >{item.status}</td>
                     <td><button onClick={() => this.handleDelete(sessionStorage.getItem("name"),item.id)} > Delete </button></td>
-                    <td><button onClick={() => window.location.href="./editItem/"+item.id} > Edit </button></td>
+                    <td><button onClick={() => window.location.href="./editItem/"+parseInt(item.id)} > Edit </button></td>
                      </tr>
             );
     
@@ -119,6 +123,8 @@ class Seller extends React.Component {
                     <td><img src={img} width="200px" height="200px" /></td>
                     <td >{item.price}</td>
                     <td >{item.description}</td>
+                    <td>{item.fromDate}</td>
+                    <td>{item.toDate}</td>
                     <td >{item.customer}</td>
                     <td>{item.category}</td>
                     <td >{item.address}</td>
@@ -130,14 +136,62 @@ class Seller extends React.Component {
         });  
       
     }
-    handleReturn(customer,id)
+    sendFeedback (templateId, variables) {
+      window.emailjs.send(
+        'gmail', templateId,
+        variables
+        ).then(res => {
+          console.log('Email successfully sent!')
+        })
+        // Handle errors here however you like, or use a React error boundary
+        .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+      }
+    handleReturn(customer,owner,id,toDate)
     {
-      var s=this.state.s;
+      if(this.state.returnedAt>toDate)
+      {
+        const templateId = 'template_Ne4ypnOa';
+        this.sendFeedback(templateId, {message_html: "You are charged with penalty because of late return", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+        var body=
+        {
+          customerNote:"You are charged with penalty because of late return",
+          ownerNote:"Please confirm Payment",
+          owner:owner,
+          customer:customer
+        }
+        const url = 'http://localhost:9000/notification'
+        let headers = new Headers();
+  
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+  
+        headers.append('Access-Control-Allow-origin', url);
+        headers.append('Access-Control-Allow-Credentials', 'true');
+  
+        headers.append('GET','POST');
+  
+        fetch(url,{
+            headers: headers,
+            method: 'POST',
+            body:JSON.stringify(body)
+        })
+        .then(response => {
+          if(response.ok){
+            
+            alert("Notified  Successfully!!")
+            
+            window.location.reload(false)
+          }
+        }) 
+        
+
+      }
+        var s=this.state.s;
         var body = {
           customer:customer,
           id:id,
           returnedAt:this.state.returnedAt,
-      }
+          }
         const url = 'http://localhost:9000/itemReturn'
           let headers = new Headers();
     
@@ -156,10 +210,13 @@ class Seller extends React.Component {
           })
           .then(response => {
             if(response.ok){
+              const templateId = 'template_Ne4ypnOa';
+              //this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
               alert("Item returned Successfully!!")
               window.location.reload(false)
             }
           }) 
+      
     }
     renderResultTaken(){
       
@@ -178,11 +235,13 @@ class Seller extends React.Component {
                 <td><img src={img} width="200px" height="200px" /></td>
                 <td >{item.price}</td>
                 <td >{item.description}</td>
+                <td>{item.fromDate}</td>
+                <td>{item.toDate}</td>
                 <td >{item.owner}</td>
                 <td>{item.category}</td>
                 <td >{item.address}</td>
                 <td >{item.status}</td>
-                <td><button onClick={() => this.handleReturn(sessionStorage.getItem("name"),item.id)} > Return </button></td><td></td>
+                <td><button onClick={() => this.handleReturn(sessionStorage.getItem("name"),item.owner,item.id,item.toDate)} > Return </button></td><td></td>
                  </tr>
           );
          }
@@ -196,10 +255,12 @@ class Seller extends React.Component {
                   <td><img src={img} width="200px" height="200px" /></td>
                   <td >{item.price}</td>
                   <td >{item.description}</td>
+                  <td>{item.fromDate}</td>
+                  <td>{item.toDate}</td>
                   <td >{item.owner}</td>
                   <td>{item.category}</td>
                   <td >{item.address}</td>
-                  <td >{item.status}</td>
+                  <td >{item.status}</td><td></td><td></td>
 
                    </tr>
           );
@@ -289,7 +350,8 @@ class Seller extends React.Component {
                         <th>Image</th>
                         <th>Price</th>
                         <th>Description</th>
-
+                        <th>From</th>
+                        <th>To</th>
                         <th>Customer</th>
                         <th>Category</th>
                         <th>Address</th>
@@ -308,6 +370,8 @@ class Seller extends React.Component {
                         <th>Image</th>
                         <th>Price</th>
                         <th>Description</th>
+                        <th>From</th>
+                        <th>To</th>
                         <th>Owner</th>
                         <th>Category</th>
                         <th>Address</th>

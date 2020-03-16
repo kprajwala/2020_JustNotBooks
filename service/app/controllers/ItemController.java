@@ -134,9 +134,11 @@ public class ItemController extends Controller {
         String description = j.get("description").asText();
         String address = j.get("address").asText();
         String category = j.get("category").asText();
-        return itemRepository.edit(id,price,description,address,category).thenApplyAsync(p -> {
+        String fromDate=j.get("fromDate").asText();
+        String toDate=j.get("toDate").asText();
+        return itemRepository.edit(id,price,description,address,category,fromDate,toDate).thenApplyAsync(p -> {
             if(p!=null)
-                return ok("Update successful");
+                return ok("Update successful"+p.id);
             else
                 return badRequest("Cannot update");
         }, ec.current());
@@ -154,9 +156,9 @@ public class ItemController extends Controller {
         if (ps == null) {
             return badRequest("Invalid credentials!!");
         } else {
-            String s = "{\"itemName\":\"" + ps.itemName + "\", \"price\":\"" + ps.price + "\",\"category\":\"" + ps.category + "\",\"address\":\"" + ps.address + "\",\"description\":\"" + ps.description + "\",\"fromDate\":\"" + ps.fromDate + "\",\"toDate\":\"" + ps.toDate + "\"}";
+            //String s = "{\"itemName\":\"" + ps.itemName + "\", \"price\":\"" + ps.price + "\",\"category\":\"" + ps.category + "\",\"address\":\"" + ps.address + "\",\"description\":\"" + ps.description + "\",\"fromDate\":\"" + ps.fromDate + "\",\"toDate\":\"" + ps.toDate + "\"}";
 
-            return ok(Json.parse(s));
+            return ok(Json.toJson(ps));
         }
 
     }
@@ -214,4 +216,6 @@ public class ItemController extends Controller {
         });
 
     }
+
+
 }

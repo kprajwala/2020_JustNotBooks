@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Nav.css"
 import {
     Route,
     NavLink,
@@ -39,6 +40,7 @@ import {
                     <li><input type="button" value="Search" onClick={this.handleSubmit}/></li>
                     <li>< a class="p" href="/logout">Logout</a></li>
                     <li><a class= "p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
+                    <li><a href="/notification" class="notification"><span>Notifications</span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
                     
               </ul>
              
