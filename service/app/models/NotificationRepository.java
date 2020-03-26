@@ -13,7 +13,7 @@ public interface NotificationRepository {
 
     CompletionStage<Notification> add(Notification notification);
     CompletionStage<Stream<Notification>> listNote(String owner);
-    Notification pay(String customer,Long id);
-   Notification confirm(String owner,Long id);
+    Person pay(String customer,Long id);
+   Person confirm(String owner,Long id);
 
 }

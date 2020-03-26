@@ -69,12 +69,12 @@ public class NotificationController extends Controller {
         JsonNode js = request().body().asJson();
         String customer = js.get("customer").asText();
         Long id=js.get("id").asLong();
-      Notification ps = notificationRepository.pay(customer,id);
+        Person ps = notificationRepository.pay(customer,id);
 
-        if (ps == null) {
+        if (ps != null) {
             /*return badRequest("not a valid");*/
 
-            return ok("Payment Successful");
+            return ok(Json.toJson(ps));
         } else {
 
             return badRequest("Cannot do payment");
@@ -85,12 +85,12 @@ public class NotificationController extends Controller {
         JsonNode js = request().body().asJson();
         String owner = js.get("owner").asText();
         Long id=js.get("id").asLong();
-        Notification ps = notificationRepository.confirm(owner,id);
+        Person ps = notificationRepository.confirm(owner,id);
 
-        if (ps == null) {
+        if (ps != null) {
             /*return badRequest("not a valid");*/
 
-            return ok("Penalty Handled");
+            return ok(Json.toJson(ps));
         } else {
 
             return badRequest("Cannot Handle penalty");
