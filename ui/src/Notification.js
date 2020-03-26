@@ -12,7 +12,8 @@ import {
       super(props);
       this.state={
           s:[],
-          l:''
+          l:'',
+          email:''
       }
        //sessionStorage.setItem("notification",this.state.notification)
     }
@@ -64,18 +65,39 @@ import {
     
           headers.append('GET','POST');
     
-          fetch(url,{
-              headers: headers,
-              method: 'POST',
-              body:JSON.stringify(body)
-          })
-          .then(response => {
-            if(response.ok){
-              alert("Penalty paid")
-              window.location.reload(false)
-            }
-          }) 
+          fetch(url, {
+            headers:headers,
+            method: 'POST',
+            body: JSON.stringify(body)
+          }).then(response => 
+            response.json().then(data => ({
+                data1: (data)
+            })
+        ).then(res => {
+            this.setState({
+                email:res.data1.email,
+               });
+            const templateId = 'template_Ne4ypnOa';
+
+            this.sendFeedback(templateId, {message_html: "Penalty paid by the customer please login to your account and confirm payment", from_name: "JustNotBooks", email: this.state.email})
+          alert("Penalty paid")
+          window.location.reload(false)
+            
+                    
+      })); 
     }
+    sendFeedback (templateId, variables) {
+        window.emailjs.send(
+          'gmail', templateId,
+          variables
+          ).then(res => {
+            console.log('Email successfully sent!')
+          })
+          // Handle errors here however you like, or use a React error boundary
+          .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+        }
+
+
     handleConfirm(id){
         var body = {
           owner:sessionStorage.getItem("name"),
@@ -92,17 +114,26 @@ import {
     
           headers.append('GET','POST');
     
-          fetch(url,{
-              headers: headers,
-              method: 'POST',
-              body:JSON.stringify(body)
-          })
-          .then(response => {
-            if(response.ok){
-              alert("Penalty removed")
-              window.location.reload(false)
-            }
-          }) 
+          fetch(url, {
+            headers:headers,
+            method: 'POST',
+            body: JSON.stringify(body)
+          }).then(response => 
+            response.json().then(data => ({
+                data1: (data)
+            })
+        ).then(res => {
+            this.setState({
+                email:res.data1.email,
+               });
+            const templateId = 'template_Ne4ypnOa';
+
+            this.sendFeedback(templateId, {message_html: "Owner confirmed your payment, Penalty is successfully removed", from_name: "JustNotBooks", email: this.state.email})
+          alert("Penalty paid")
+          window.location.reload(false)
+            
+                    
+      })); 
 
     }
     handleButton(cs,id){

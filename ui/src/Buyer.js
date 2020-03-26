@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+//import { Container } from "react-bootstrap";
+//import Col from 'react-bootstrap/Col'
+//import Row from 'react-bootstrap/Row'
 //import UserProfile from "./UserProfile";
 import Nav from "./Nav.js"
 import "./Buyer.css"
@@ -104,11 +104,11 @@ class Buyer extends React.Component {
       else{
 
         var s=this.state.s;
-      var body = {
+        var body = {
         customer:customer,
         id:id,
         takenAt:this.state.takenAt
-    }
+        }
       const url = 'http://localhost:9000/borrow'
         let headers = new Headers();
   
@@ -128,7 +128,7 @@ class Buyer extends React.Component {
         .then(response => {
           if(response.ok){
             const templateId = 'template_Ne4ypnOa';
-            //this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+            this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
             alert("Thanks for Borrowing!! Return on time is appreciated..")
             window.location.reload(false)
           }

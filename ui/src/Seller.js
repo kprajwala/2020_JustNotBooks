@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+//import { Container } from "react-bootstrap";
+//import Col from 'react-bootstrap/Col'
+//import Row from 'react-bootstrap/Row'
 //import UserProfile from "./UserProfile";
 import Nav from "./Nav.js"
 import "./Buyer.css"
@@ -148,17 +148,18 @@ class Seller extends React.Component {
       }
     handleReturn(customer,owner,id,toDate)
     {
-      if(this.state.returnedAt>toDate)
+      if(this.state.returnedAt<=toDate)
       {
-        const templateId = 'template_Ne4ypnOa';
-        this.sendFeedback(templateId, {message_html: "You are charged with penalty because of late return", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+        var pay=this.state.returnedAt-toDate;
+        
         var body=
         {
-          customerNote:"You are charged with penalty because of late return",
+          customerNote:"You are charged with penalty of "+pay*10+" because of late return",
           ownerNote:"Please confirm Payment",
           owner:owner,
           customer:customer
         }
+        console.log(pay);
         const url = 'http://localhost:9000/notification'
         let headers = new Headers();
   
@@ -177,16 +178,16 @@ class Seller extends React.Component {
         })
         .then(response => {
           if(response.ok){
-            
+            const templateId = 'template_Ne4ypnOa';
+            var msg="You are charged with penalty because of late return, Please check your account for more information";
+            this.sendFeedback(templateId, {message_html: msg, from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
             alert("Notified  Successfully!!")
             
             window.location.reload(false)
           }
         }) 
-        
-
-      }
-        var s=this.state.s;
+        {
+          var s=this.state.s;
         var body = {
           customer:customer,
           id:id,
@@ -216,6 +217,42 @@ class Seller extends React.Component {
               window.location.reload(false)
             }
           }) 
+        
+        }
+        }
+        else{
+          var s=this.state.s;
+          var body = {
+            customer:customer,
+            id:id,
+            returnedAt:this.state.returnedAt,
+            }
+          const url = 'http://localhost:9000/itemReturn'
+            let headers = new Headers();
+      
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+      
+            headers.append('Access-Control-Allow-origin', url);
+            headers.append('Access-Control-Allow-Credentials', 'true');
+      
+            headers.append('GET','POST');
+      
+            fetch(url,{
+                headers: headers,
+                method: 'POST',
+                body:JSON.stringify(body)
+            })
+            .then(response => {
+              if(response.ok){
+                const templateId = 'template_Ne4ypnOa';
+                this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+                alert("Item returned Successfully!!")
+                window.location.reload(false)
+              }
+            }) 
+          
+        }
       
     }
     renderResultTaken(){

@@ -67,6 +67,7 @@ class Profile extends Component {
                       
         })); 
        
+       
     }
     
       handleNameChange=event=>{

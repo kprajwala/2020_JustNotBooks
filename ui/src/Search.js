@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+//import { Container } from "react-bootstrap";
+//import Col from 'react-bootstrap/Col'
+//import Row from 'react-bootstrap/Row'
 //import UserProfile from "./UserProfile";
 import Nav from "./Nav.js"
 import "./Buyer.css"
@@ -80,40 +80,50 @@ class Search extends React.Component {
           .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
         }
      
-      handleBorrow(customer,id){
+        handleBorrow(customer,id,fromDate){
 
-        var s=this.state.s;
-        var body = {
-          customer:customer,
-          id:id,
-      }
-        const url = 'http://localhost:9000/borrow'
-          let headers = new Headers();
+          if(this.state.takenAt<fromDate)
+          {
+            alert("Cannot Borrow as it is unavailable for now!!");
+          }
+          else{
     
-          headers.append('Content-Type', 'application/json');
-          headers.append('Accept', 'application/json');
-    
-          headers.append('Access-Control-Allow-origin', url);
-          headers.append('Access-Control-Allow-Credentials', 'true');
-    
-          headers.append('GET','POST');
-    
-          fetch(url,{
-              headers: headers,
-              method: 'POST',
-              body:JSON.stringify(body)
-          })
-          .then(response => {
-            if(response.ok){
-              const templateId = 'template_Ne4ypnOa';
-            this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
-              alert("Thanks for Borrowing!! Return on time is appreciated..")
-              window.location.reload(false)
+            var s=this.state.s;
+            var body = {
+            customer:customer,
+            id:id,
+            takenAt:this.state.takenAt
             }
-          }) 
-    
-    
-      }
+          const url = 'http://localhost:9000/borrow'
+            let headers = new Headers();
+      
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+      
+            headers.append('Access-Control-Allow-origin', url);
+            headers.append('Access-Control-Allow-Credentials', 'true');
+      
+            headers.append('GET','POST');
+      
+            fetch(url,{
+                headers: headers,
+                method: 'POST',
+                body:JSON.stringify(body)
+            })
+            .then(response => {
+              if(response.ok){
+                const templateId = 'template_Ne4ypnOa';
+                this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+                alert("Thanks for Borrowing!! Return on time is appreciated..")
+                window.location.reload(false)
+              }
+            }) 
+          }
+          
+      
+      
+        }
+      
       
      
 
@@ -158,7 +168,7 @@ class Search extends React.Component {
                     <td>{item.category}</td>
                     <td >{item.address}</td>
                     <td >{item.status}</td>
-                    <td><button onClick={() => this.handleBorrow(sessionStorage.getItem("name"),item.id)} > Borrow </button></td>
+                    <td><button onClick={() => this.handleBorrow(sessionStorage.getItem("name"),item.id,item.fromDate)} > Borrow </button></td>
                      </tr>
             );
          }
