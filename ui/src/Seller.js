@@ -148,7 +148,7 @@ class Seller extends React.Component {
       }
     handleReturn(customer,owner,id,toDate)
     {
-      if(this.state.returnedAt<=toDate)
+      if(this.state.returnedAt>toDate)
       {
         var pay=this.state.returnedAt-toDate;
         
