@@ -11,6 +11,7 @@ GET     /personVal/:user            controllers.PersonController.valid(user: Str
 POST     /personVal                  controllers.PersonController.login()
 POST     /check                      controllers.PersonController.checkName()
 POST    /edit                       controllers.PersonController.editPerson()
+POST    /editPassword               controllers.PersonController.editPassword()
 
 
 POST    /item                      controllers.ItemController.addItem()
