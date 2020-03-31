@@ -15,9 +15,10 @@ export class Login extends React.Component {
 
     }
     this.handleNameChange=this.handleNameChange.bind(this)
-	this.handlePasswordChange=this.handlePasswordChange.bind(this)
-	this.handleSubmit=this.handleSubmit.bind(this)
-	
+	  this.handlePasswordChange=this.handlePasswordChange.bind(this)
+	  this.handleSubmit=this.handleSubmit.bind(this)
+    this.handleCancel=this.handleCancel.bind(this)
+  
   }
   
   handleNameChange=event=>{
@@ -30,6 +31,10 @@ export class Login extends React.Component {
     this.setState({
       pswd : event.target.value
     });
+  }
+  handleCancel(event){
+    window.history.back();
+     // this.props.history.push("/");
   }
 
   handleSubmit=event=>{
@@ -107,6 +112,7 @@ export class Login extends React.Component {
 					</div>
 
 					<input type="submit" value="Login" onClick={this.handleSubmit}/>
+          <input type="submit" value="Cancel" onClick={this.handleCancel}/>
 				</form>
 
 				<a href ="/">Create an account</a>

@@ -33,6 +33,7 @@ export class Edit extends React.Component {
     this.handleEmailChange=this.handleEmailChange.bind(this)
     this.handlePhoneNumberChange=this.handlePhoneNumberChange.bind(this)
     this.handleUpdate=this.handleUpdate.bind(this)
+    this.handleCancel=this.handleCancel.bind(this)
     this.state.name=sessionStorage.getItem("name")
   }
 
@@ -83,7 +84,10 @@ export class Edit extends React.Component {
   
   
 
-   
+  handleCancel(){
+    //window.location.href="/home";
+    window.history.back();
+  }
   handleUpdate(event) {
     
         event.preventDefault();
@@ -167,6 +171,7 @@ export class Edit extends React.Component {
                  
 			
 					<input type="submit" value="Update" onClick={this.handleUpdate}/>
+          <input type="submit" value="Cancel" onClick={this.handleCancel}/>
 				</form>
 			</div>
       </div>

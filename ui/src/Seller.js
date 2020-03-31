@@ -148,10 +148,10 @@ class Seller extends React.Component {
       }
     handleReturn(customer,owner,id,toDate)
     {
-      if(this.state.returnedAt>toDate)
+      if(this.state.returnedAt<=toDate)
       {
-        var pay=this.state.returnedAt-toDate;
-        
+        var pay=parseInt(this.state.returnedAt-toDate);
+        console.log("pay"+pay);
         var body=
         {
           customerNote:"You are charged with penalty of "+pay*10+" because of late return",
@@ -159,7 +159,7 @@ class Seller extends React.Component {
           owner:owner,
           customer:customer
         }
-        console.log(pay);
+        
         const url = 'http://localhost:9000/notification'
         let headers = new Headers();
   
@@ -182,7 +182,7 @@ class Seller extends React.Component {
             var msg="You are charged with penalty because of late return, Please check your account for more information";
             this.sendFeedback(templateId, {message_html: msg, from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
             alert("Notified  Successfully!!")
-            
+           
             window.location.reload(false)
           }
         }) 

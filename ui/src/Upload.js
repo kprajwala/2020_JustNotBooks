@@ -32,6 +32,7 @@ export class Upload extends React.Component {
     this.handleSubmit=this.handleSubmit.bind(this)
     this.handleImage=this.handleImage.bind(this)
     //this.DateEnabale=this.DateEnabale.bind(this)
+    this.handleCancel=this.handleCancel.bind(this)
     this.state.owner = sessionStorage.getItem("name");
     this.state.uploadedAt=Date();
     
@@ -98,6 +99,10 @@ export class Upload extends React.Component {
       toDate : event.target.value
     });
     
+  }
+  handleCancel(){
+    //window.location.href="/home";
+    window.history.back();
   }
 
   handleSubmit(event) {
@@ -269,6 +274,7 @@ export class Upload extends React.Component {
 		
 
 					<div align="center" ><input type="submit" value="Submit" onClick={this.handleSubmit}/></div></h5>
+          <input type="submit" value="Cancel" onClick={this.handleCancel}/>
 				</form>
 
 			</div>

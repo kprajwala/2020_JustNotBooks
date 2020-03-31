@@ -22,12 +22,15 @@ class Profile extends Component {
       this.handlePhoneChange=this.handlePhoneChange.bind(this)
       this.handleUpload=this.handleUpload.bind(this);
       this.handleEdit=this.handleEdit.bind(this);
+      this.handleEditPassword=this.handleEditPassword.bind(this);
     
       //eid=this.props.match.params.id;
       //console.log(eid);
        
     
     }
+    
+
     componentDidMount(){
       const url = "http://localhost:9000/details";
       
@@ -97,6 +100,10 @@ class Profile extends Component {
     handleEdit=event=>{
       this.props.history.push("/edit");
   }
+
+  handleEditPassword(){
+    this.props.history.push("/editPswd");
+  }
     render() {
       
       return (
@@ -128,6 +135,7 @@ class Profile extends Component {
 
         
         <input type="submit" value="Edit" onClick={this.handleEdit}></input>
+        <input type="submit" value="Edit Password" onClick={this.handleEditPassword}></input>
         <input type="submit" value="Upload" onClick={this.handleUpload}></input>
       </div>
       </div>);

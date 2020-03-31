@@ -32,7 +32,8 @@ export class Register extends React.Component {
     this.handlePhoneNumberChange=this.handlePhoneNumberChange.bind(this)
 	  this.handlePasswordChange=this.handlePasswordChange.bind(this)
 	  this.handleConfirmPasswordChange=this.handleConfirmPasswordChange.bind(this)
-	  this.handleSubmit=this.handleSubmit.bind(this)
+    this.handleSubmit=this.handleSubmit.bind(this)
+    this.handleCancel=this.handleCancel.bind(this)
 	
   }
   
@@ -90,6 +91,10 @@ export class Register extends React.Component {
     });
   }
 
+  handleCancel(){
+    //window.location.href="/home";
+    window.location.reload();
+  }
 
   handleSubmit(event) {
     
@@ -230,6 +235,7 @@ else if(this.state.pswd==""){
 		
 
 					<input type="submit" value="Register" onClick={this.handleSubmit}/>
+          <input type="submit" value="Cancel" onClick={this.handleCancel}/>
 				</form>
 
 				<a href ="/login">Login here</a>

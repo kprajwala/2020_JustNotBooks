@@ -30,6 +30,7 @@ export class EditItem extends React.Component {
     this.handleToChange=this.handleToChange.bind(this)
     this.handleUpdate=this.handleUpdate.bind(this)
     //this.DateEnabale=this.DateEnabale.bind(this)
+    this.handleCancel=this.handleCancel.bind(this)
     this.state.owner = sessionStorage.getItem("name");
     
   }
@@ -177,6 +178,11 @@ export class EditItem extends React.Component {
         })); 
        
     }
+    handleCancel(){
+      //window.location.href="/home";
+      window.history.back();
+    }
+     
   
   
   render() {
@@ -258,6 +264,7 @@ export class EditItem extends React.Component {
                           
 			
 					<input type="submit" value="Update" onClick={this.handleUpdate}/>
+          <input type="submit" value="Cancel" onClick={this.handleCancel}/>
 				</form>
 			</div>
       </div>

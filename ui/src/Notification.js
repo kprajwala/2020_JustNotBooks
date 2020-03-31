@@ -144,7 +144,7 @@ import {
         }
         else{
             return(
-                <td><button onClick={() => this.handleConfirm(id)} visibility="hidden"> Payment Done </button></td>
+                <td></td>
             );
         }
     }

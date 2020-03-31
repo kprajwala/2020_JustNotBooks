@@ -14,6 +14,7 @@ import Home from "./Home";
   import EditItem from "./EditItem"
 import Search from "./Search";
 import Notification from "./Notification"
+import EditPswd from "./EditPswd"
 
 class App extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class App extends React.Component {
               <Route path="/editItem/:id" component={EditItem}/>
               <Route path="/search" component={Search}/>
               <Route path="/notification" component={Notification}/>
+              <Route path="/editPswd"   component={EditPswd}/>
        
         </div>
       </BrowserRouter>
