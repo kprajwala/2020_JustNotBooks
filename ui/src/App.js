@@ -19,7 +19,7 @@ import EditPswd from "./EditPswd"
 class App extends React.Component {
   constructor(props) {
     super(props);
-}
+  }
 
 
   render() {

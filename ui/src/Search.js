@@ -138,7 +138,7 @@ class Search extends React.Component {
          let img="/pictures/"+item.image
          if(item.category=="buy"){
             return (
-                <tr id={id}>
+                <tr id={id} class="tr">
                     
                     <td >{item.itemName}</td>
                     <td><img src={img} width="200px" height="200px" /></td>
@@ -156,7 +156,7 @@ class Search extends React.Component {
          }
          else if(item.category=="borrow"){
             return (
-                <tr id={id}>
+                <tr id={id} class="tr">
                     
                     <td >{item.itemName}</td>
                     <td><img src={img} width="200px" height="200px" /></td>
@@ -174,7 +174,7 @@ class Search extends React.Component {
          }
          else{
             return (
-                <tr id={id}>
+                <tr id={id} class="tr">
                     
                     <td >{item.itemName}</td>
                     <td><img src={img} width="200px" height="200px" /></td>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Nav from "./Nav.js"
+import "./Buyer.css"
 import {
     Route,
     NavLink,
@@ -159,7 +160,7 @@ import {
             {
                 return (
 
-                    <tr id={id}>
+                    <tr id={id} class="tr">
                         
                         <td >{note.ownerNote}</td>
     
@@ -193,7 +194,7 @@ import {
             if(note.customer==sessionStorage.getItem("name"))
             {
                 return (
-                    <tr id={id}>
+                    <tr id={id} class="tr">
                         
                         <td >{note.customerNote}</td>
                       

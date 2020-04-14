@@ -148,7 +148,7 @@ class Buyer extends React.Component {
            //console.log(i,typeof(i))
            let img="/pictures/"+item.image
             return (
-                <tr id={id}>
+                <tr id={id} class="tr">
                     
                     <td >{item.itemName}</td>
                     <td><img src={img} width="200px" height="200px" /></td>
@@ -238,7 +238,7 @@ class Buyer extends React.Component {
             //console.log(i,typeof(i))
             let img="/pictures/"+item.image
               return (
-                  <tr id={id}>
+                  <tr id={id} class="tr">
                       
                       <td >{item.itemName}</td>
                       <td><img src={img} width="200px" height="200px" /></td>
@@ -300,7 +300,7 @@ class Buyer extends React.Component {
        //console.log(i,typeof(i))
        let img="/pictures/"+item.image
         return (
-            <tr id={id}>
+            <tr id={id} class="tr">
                 
                 <td >{item.itemName}</td>
                 <td><img src={img} width="200px" height="200px" /></td>

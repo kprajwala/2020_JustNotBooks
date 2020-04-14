@@ -96,7 +96,7 @@ class Seller extends React.Component {
              let img="/pictures/"+item.image
             return (
 
-                <tr id={id}>
+                <tr id={id} class="tr">
                     
                     <td >{item.itemName}</td>
                     <td><img src={img} width="200px" height="200px" /></td>
@@ -117,7 +117,7 @@ class Seller extends React.Component {
             else{
               let img="/pictures/"+item.image
               return (
-                <tr id={id}>
+                <tr id={id} class="tr">
                     
                     <td >{item.itemName}</td>
                     <td><img src={img} width="200px" height="200px" /></td>
@@ -266,7 +266,7 @@ class Seller extends React.Component {
          if(item.category=="borrow")
          {
           return (
-            <tr id={id}>
+            <tr id={id} class="tr">
                 
                 <td >{item.itemName}</td>
                 <td><img src={img} width="200px" height="200px" /></td>
@@ -286,7 +286,7 @@ class Seller extends React.Component {
           else
           {
             return (
-              <tr id={id}>
+              <tr id={id} class="tr">
                   
                   <td >{item.itemName}</td>
                   <td><img src={img} width="200px" height="200px" /></td>
