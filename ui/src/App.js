@@ -16,6 +16,7 @@ import Search from "./Search";
 import Notification from "./Notification"
 import EditPswd from "./EditPswd"
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -40,6 +41,7 @@ class App extends React.Component {
               <Route path="/search" component={Search}/>
               <Route path="/notification" component={Notification}/>
               <Route path="/editPswd"   component={EditPswd}/>
+              
        
         </div>
       </BrowserRouter>

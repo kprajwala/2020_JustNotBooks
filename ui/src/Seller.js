@@ -148,10 +148,17 @@ class Seller extends React.Component {
       }
     handleReturn(customer,owner,id,toDate)
     {
-      if(this.state.returnedAt<=toDate)
+      if(this.state.returnedAt>toDate)
       {
-        var pay=parseInt(this.state.returnedAt-toDate);
-        console.log("pay"+pay);
+        //var pay=parseInt(this.state.returnedAt)-parseInt(toDate);
+        var date1 = new Date(this.state.returnedAt); 
+        var date2 = new Date(toDate); 
+  
+// To calculate the time difference of two dates 
+        var Difference_In_Time = date2.getTime() - date1.getTime(); 
+  
+// To calculate the no. of days between two dates 
+        var pay = Difference_In_Time / (1000 * 3600 * 24);
         var body=
         {
           customerNote:"You are charged with penalty of "+pay*10+" because of late return",

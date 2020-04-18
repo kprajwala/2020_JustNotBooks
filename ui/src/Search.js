@@ -7,6 +7,7 @@ import Nav from "./Nav.js"
 import "./Buyer.css"
 import "./Seller.css"
 import Buyer from "./Buyer.js";
+// import { static } from "express";
 
 
 const admin = {
@@ -20,7 +21,7 @@ const table = {
     top:'20%',
     left:'40%'
 }
-      
+
 class Search extends React.Component {
 
     constructor(props) {
@@ -29,11 +30,15 @@ class Search extends React.Component {
            
            s:[],
            takenAt:'',
-    
+          
+           
          }
+         
          this.state.takenAt=Date();
-
+         
+        
     }
+  
     handleBuy(customer,id){
 
         var s=this.state.s;
@@ -227,8 +232,11 @@ class Search extends React.Component {
           
                   
   }
+  
+      
         componentDidMount(){
           this.items()
+          
           }
     
         render() {
