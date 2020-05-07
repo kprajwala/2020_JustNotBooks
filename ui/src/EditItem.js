@@ -1,7 +1,7 @@
 import React from "react";
 import "./edit.css"
 import Nav from "./Nav.js"
-
+import swal from 'sweetalert'
 
 
 export class EditItem extends React.Component {
@@ -125,10 +125,8 @@ export class EditItem extends React.Component {
         .catch(()=> console.log("can't access " + url + " response. "))
 
 
-        alert('Details are Edited successfully');
-            //this.fun.bind(this);*/
-            //window.location.reload(false);
-            //window.location.href="./profile";
+        //alert('Details are Edited successfully');
+        swal("Good job!",'Details are edited successfully',"success");
             this.props.history.push("/seller");
         
 

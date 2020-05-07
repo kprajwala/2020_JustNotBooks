@@ -1,6 +1,7 @@
 import React from "react";
 import "./upload.css"
 import Nav from "./Nav.js"
+import swal from 'sweetalert'
 
 var image1;
 export class Upload extends React.Component {
@@ -167,7 +168,8 @@ export class Upload extends React.Component {
  .catch(()=> console.log("can't access " + url + " response. "))
 
 
- alert('Item uploaded');
+ //alert('Item uploaded');
+ swal("Good job!",'Item uploaded',"success");
  
   }
 }

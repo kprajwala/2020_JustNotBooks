@@ -7,7 +7,8 @@ import Nav from "./Nav.js"
 import "./Buyer.css"
 import "./Seller.css"
 import EditItem from "./EditItem"
-
+//<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+import swal from 'sweetalert'
 const admin = {
     width: '100%',
     height: '100%',
@@ -72,7 +73,11 @@ class Seller extends React.Component {
           })
           .then(response => {
             if(response.ok){
-              alert("Item deleted Successfully!!")
+              //alert("Item deleted Successfully!!")
+              
+                swal("Good job!","Item deleted successfully!","success");
+                //swal({title:"Good job!",text:"Item deleted successfully!",type:"success",timer:3000});
+
               window.location.reload(false)
             }
           }) 
@@ -188,7 +193,7 @@ class Seller extends React.Component {
             const templateId = 'template_Ne4ypnOa';
             var msg="You are charged with penalty because of late return, Please check your account for more information";
             this.sendFeedback(templateId, {message_html: msg, from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
-            alert("Notified  Successfully!!")
+            //alert("Notified  Successfully!!")
            
             window.location.reload(false)
           }
@@ -220,7 +225,8 @@ class Seller extends React.Component {
             if(response.ok){
               const templateId = 'template_Ne4ypnOa';
               //this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
-              alert("Item returned Successfully!!")
+              //alert("Item returned Successfully!!")
+              swal("Good job!","Item returned successfully!","success");
               window.location.reload(false)
             }
           }) 
@@ -254,7 +260,9 @@ class Seller extends React.Component {
               if(response.ok){
                 const templateId = 'template_Ne4ypnOa';
                 this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
-                alert("Item returned Successfully!!")
+                //alert("Item returned Successfully!!")
+                swal("Good job!","Item returned successfully!","success");
+                //swal({title:"Good job!",text:"Item returned successfully!",type:"success",timer:5000});
                 window.location.reload(false)
               }
             }) 

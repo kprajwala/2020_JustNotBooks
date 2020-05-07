@@ -6,6 +6,7 @@ import {
     NavLink,
     HashRouter
   } from "react-router-dom";
+import swal from "sweetalert";
   
 
   class Notification extends React.Component{
@@ -81,7 +82,8 @@ import {
             const templateId = 'template_Ne4ypnOa';
 
             this.sendFeedback(templateId, {message_html: "Penalty paid by the customer please login to your account and confirm payment", from_name: "JustNotBooks", email: this.state.email})
-          alert("Penalty paid")
+          //alert("Penalty paid")
+          swal("Good Job!!","Penalty Paid!","success")
           window.location.reload(false)
             
                     
@@ -130,7 +132,8 @@ import {
             const templateId = 'template_Ne4ypnOa';
 
             this.sendFeedback(templateId, {message_html: "Owner confirmed your payment, Penalty is successfully removed", from_name: "JustNotBooks", email: this.state.email})
-          alert("Penalty paid")
+          //alert("Penalty paid")
+          swal("Good Job!","Penalty Successfully removed","success")
           window.location.reload(false)
             
                     

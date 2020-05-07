@@ -8,7 +8,7 @@ import "./Buyer.css"
 import "./Seller.css"
 import Buyer from "./Buyer.js";
 // import { static } from "express";
-
+import swal from 'sweetalert'
 
 const admin = {
     width: '100%',
@@ -67,7 +67,8 @@ class Search extends React.Component {
             if(response.ok){
               const templateId = 'template_Ne4ypnOa';
             this.sendFeedback(templateId, {message_html: "Thank you for purchasing!!", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
-              alert("Thank you for Purchasing!!")
+              //alert("Thank you for Purchasing!!")
+              swal("Thanks!!","Thank you for Purchasing!!","success");
               window.location.reload(false)
             }
           }) 
@@ -89,7 +90,8 @@ class Search extends React.Component {
 
           if(this.state.takenAt<fromDate)
           {
-            alert("Cannot Borrow as it is unavailable for now!!");
+            //alert("Cannot Borrow as it is unavailable for now!!");
+            swal("Error","Cannot Borrow as it is unavailable for now!!","error");
           }
           else{
     
@@ -119,7 +121,8 @@ class Search extends React.Component {
               if(response.ok){
                 const templateId = 'template_Ne4ypnOa';
                 this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
-                alert("Thanks for Borrowing!! Return on time is appreciated..")
+                //alert("Thanks for Borrowing!! Return on time is appreciated..")
+                swal("Thanks!!","Thanks for Borrowing!! Return on time is appreciated..","success");
                 window.location.reload(false)
               }
             }) 

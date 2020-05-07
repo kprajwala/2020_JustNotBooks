@@ -1,6 +1,7 @@
 import React from "react";
 import "./edit.css"
 import Nav from "./Nav.js"
+import swal from "sweetalert";
 
 
 
@@ -86,13 +87,15 @@ export class EditItem extends React.Component {
             .then(response => {if(response.ok){
                 const templateId = 'template_Ne4ypnOa';
                 this.sendFeedback(templateId, {message_html: "Your Password has been changed", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
-                alert("Password Changed")
+                //alert("Password Changed")
+                swal("Good Job!","Password Changed Successfully!","success")
                  this.props.history.push("/profile");
           
                 
                 }
                 else {
-                  alert("Old Password does not matched")
+                  //alert("Old Password does not matched")
+                  swal("Error!","Old Password does not matched","error")
               }
            })
 

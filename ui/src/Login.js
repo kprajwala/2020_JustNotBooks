@@ -1,4 +1,5 @@
 import React from "react";
+import swal from 'sweetalert'
 
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import "./login.css";
@@ -80,7 +81,9 @@ export class Login extends React.Component {
       //window.location.href="/main";
 	  }
 	  else {
-		alert("Invalid Credentials")
+    //alert("Invalid Credentials")
+    swal("Error","Invalid Credentials","error")
+    //swal({title:"Error!!",text:"Invalid Credentials",type:"success",timer:5000});
     }
  })
   }

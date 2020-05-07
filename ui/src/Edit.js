@@ -1,6 +1,7 @@
 import React from "react";
 import "./edit.css"
 import Nav from "./Nav.js"
+import swal from 'sweetalert'
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 const validMobileRegex = RegExp(/^[6-9]{1}[0-9]{9}$/);
@@ -124,10 +125,8 @@ export class Edit extends React.Component {
         .catch(()=> console.log("can't access " + url + " response. "))
 
 
-        alert('Details are updated successful');
-            //this.fun.bind(this);*/
-            //window.location.reload(false);
-            //window.location.href="./profile";
+        //alert('Details are updated successful');
+        swal("Good job!",'Details are updated successfully',"success");
             this.props.history.push("./profile");
         
 

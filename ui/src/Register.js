@@ -1,5 +1,6 @@
 import React from "react";
 import "./register.css";
+import swal from 'sweetalert'
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 const validMobileRegex = RegExp(/^[6-9]{1}[0-9]{9}$/);
@@ -149,7 +150,9 @@ else if(this.state.pswd==""){
 
       .then(response => {if(response.ok){
             
-        alert('Details submitted successfully!!');
+        //alert('Details submitted successfully!!');
+        //swal({title:"Error",text:"Details submitted successfully!!",type:"success",timer:5000});
+        swal("Good Job!","Details submitted successfully!!","success")
         //this.fun.bind(this);
         this.props.history.push("/login");
             //window.location.href="/main";
@@ -158,7 +161,9 @@ else if(this.state.pswd==""){
 
         
         //this.fun.bind(this);
-        alert('Username already exists!!Please try to login');
+        //alert('Username already exists!!Please try to login');
+        //swal({title:"Error",text:"Username already exists!!Please try to login",type:"error",timer:5000});
+        swal("Error!","Username already exists!!Please try to login","error")
         this.props.history.push("/login");
 
       }
