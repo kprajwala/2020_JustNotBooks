@@ -158,7 +158,7 @@ else if(this.state.pswd==""){
 
         
         //this.fun.bind(this);
-        alert('Username already exists!!');
+        alert('Username already exists!!Please try to login');
         this.props.history.push("/login");
 
       }

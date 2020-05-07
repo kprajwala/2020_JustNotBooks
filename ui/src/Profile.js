@@ -114,6 +114,7 @@ class Profile extends Component {
         <h1><div align ="center"> My Profile</div></h1>
         
 				<form onSubmit={this.displayLogin}>
+                  
                     <div class="row">
                         <div class="collabel">
                               <h4>Name:{sessionStorage.getItem("name")}</h4>
