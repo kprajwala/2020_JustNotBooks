@@ -126,8 +126,9 @@ export class Edit extends React.Component {
 
 
         //alert('Details are updated successful');
-        swal("Good job!",'Details are updated successfully',"success");
-            this.props.history.push("./profile");
+        swal({title:"Good job!",text:'Details are updated successfully',icon:"success",timer:3000,closeOnClickOutside: false,});
+              this.props.history.push("./profile");
+            
         
 
     }

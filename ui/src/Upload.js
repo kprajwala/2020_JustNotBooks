@@ -170,6 +170,7 @@ export class Upload extends React.Component {
 
  //alert('Item uploaded');
  swal("Good job!",'Item uploaded',"success");
+ this.props.history.push("./profile");
  
   }
 }

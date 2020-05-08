@@ -75,10 +75,15 @@ class Seller extends React.Component {
             if(response.ok){
               //alert("Item deleted Successfully!!")
               
-                swal("Good job!","Item deleted successfully!","success");
-                //swal({title:"Good job!",text:"Item deleted successfully!",type:"success",timer:3000});
+              //   swal("Good job!","Item deleted successfully!","success");
+              //   //swal({title:"Good job!",text:"Item deleted successfully!",type:"success",timer:3000});
 
-              window.location.reload(false)
+              // window.location.reload(false)
+              swal({title: "Good job", text: "Item deleted successfully!", icon: 
+                  "success"}).then(function(){ 
+                    window.location.reload();
+                    }
+                  );
             }
           }) 
     
@@ -153,7 +158,7 @@ class Seller extends React.Component {
       }
     handleReturn(customer,owner,id,toDate)
     {
-      if(this.state.returnedAt>toDate)
+      if(this.state.returnedAt<=toDate)
       {
         //var pay=parseInt(this.state.returnedAt)-parseInt(toDate);
         var date1 = new Date(this.state.returnedAt); 
@@ -195,7 +200,7 @@ class Seller extends React.Component {
             this.sendFeedback(templateId, {message_html: msg, from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
             //alert("Notified  Successfully!!")
            
-            window.location.reload(false)
+            //window.location.reload(false)
           }
         }) 
         {
@@ -226,8 +231,13 @@ class Seller extends React.Component {
               const templateId = 'template_Ne4ypnOa';
               //this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
               //alert("Item returned Successfully!!")
-              swal("Good job!","Item returned successfully!","success");
-              window.location.reload(false)
+              // swal("Good job!","Item returned successfully!","success");
+              // window.location.reload(false)
+              swal({title: "Good job", text: "Item returned successfully!", icon: 
+                  "success"}).then(function(){ 
+                    window.location.reload();
+                    }
+                  );
             }
           }) 
         
@@ -261,9 +271,14 @@ class Seller extends React.Component {
                 const templateId = 'template_Ne4ypnOa';
                 this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
                 //alert("Item returned Successfully!!")
-                swal("Good job!","Item returned successfully!","success");
-                //swal({title:"Good job!",text:"Item returned successfully!",type:"success",timer:5000});
-                window.location.reload(false)
+                // swal("Good job!","Item returned successfully!","success");
+                // //swal({title:"Good job!",text:"Item returned successfully!",type:"success",timer:5000});
+                // window.location.reload(false)
+                swal({title: "Good job", text: "Item returned successfully!", icon: 
+                  "success"}).then(function(){ 
+                    window.location.reload();
+                    }
+                  );
               }
             }) 
           

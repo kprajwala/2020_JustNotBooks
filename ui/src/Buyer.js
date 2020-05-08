@@ -46,7 +46,6 @@ class Buyer extends React.Component {
         } 
         this.state.takenAt = yyyy+'-'+mm+'-'+dd; 
        }
-    
    
     handleBuy(customer,id){
 
@@ -80,12 +79,21 @@ class Buyer extends React.Component {
             var note="Thank you for purchasing!!"
             sessionStorage.setItem("notification",note)
             //alert("Thank you for purchasing!!")
-            swal("Thanks!","Thank you for purchasing!","success")
-            window.location.reload(false)
+            // swal("Thanks!","Thank you for purchasing!","success")
+            
+            //  this.props.history.push("./seller");
+             swal({title: "Thanks!", text: "Thank you for purchasing!", icon: 
+                "success"}).then(function(){ 
+                    window.location.reload();
+                }
+            );
+            // window.location.reload(false)
+            
           }
         }) 
         
     }
+    
     sendFeedback (templateId, variables) {
       window.emailjs.send(
         'gmail', templateId,
@@ -133,8 +141,14 @@ class Buyer extends React.Component {
             const templateId = 'template_Ne4ypnOa';
             this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
             //alert("Thanks for Borrowing!! Return on time is appreciated..")
-            swal("Thanks!","Thanks for Borrowing!! Return on time is appreciated..","success")
-            window.location.reload(false)
+            //  swal("Thanks!","Thanks for Borrowing!! Return on time is appreciated..","success")
+            // this.props.history.push("./seller");
+            swal({title: "Thanks!", text: "Thanks for Borrowing!! Return on time is appreciated..", icon: 
+                "success"}).then(function(){ 
+                    window.location.reload();
+                }
+            );
+            
           }
         }) 
       }

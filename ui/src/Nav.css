@@ -7,16 +7,23 @@
     display: inline-block;
     border-radius: 2px;
     float:right;
+    opacity: 1;
   }
   
   .notification:hover {
-    background-color:grey;
-    color:black;
+    /* background-color:grey;
+    color:black; */
+    opacity: 0.5;
+
 
   }
+  a{
+    opacity: 1;
+  }
   a:hover{
-    background-color:grey;
-    color:black;
+    /* background-color:grey;
+    color:black; */
+    opacity: 0.2;
   }
  
   .notification .badge {

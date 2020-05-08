@@ -83,8 +83,13 @@ import swal from "sweetalert";
 
             this.sendFeedback(templateId, {message_html: "Penalty paid by the customer please login to your account and confirm payment", from_name: "JustNotBooks", email: this.state.email})
           //alert("Penalty paid")
-          swal("Good Job!!","Penalty Paid!","success")
-          window.location.reload(false)
+          //swal("Good Job!!","Penalty Paid!","success")
+          swal({title: "Good job", text: "Penalty Paid!", icon: 
+                "success"}).then(function(){ 
+                    window.location.reload();
+                }
+            );
+          //window.location.reload(false)
             
                     
       })); 
@@ -133,14 +138,19 @@ import swal from "sweetalert";
 
             this.sendFeedback(templateId, {message_html: "Owner confirmed your payment, Penalty is successfully removed", from_name: "JustNotBooks", email: this.state.email})
           //alert("Penalty paid")
-          swal("Good Job!","Penalty Successfully removed","success")
-          window.location.reload(false)
+        //   swal("Good Job!","Penalty Successfully removed","success")
+        //   window.location.reload(false)
+        swal({title: "Good job", text: "Penalty Successfully removed", icon: 
+                "success"}).then(function(){ 
+                    window.location.reload();
+                }
+            );
             
                     
       })); 
 
     }
-    handleButton(cs,id){
+    handleButton1(cs,id){
         if(cs=="Processed"){
             return(
                 <td><button onClick={() => this.handleConfirm(id)} > Payment Done </button></td>
@@ -171,7 +181,7 @@ import swal from "sweetalert";
                         
                         <td>{note.ownerStatus}</td>
                         <td>{note.customerStatus}</td>
-                        <td>{this.handleButton(note.customerStatus,note.id)}</td>
+                        <td>{this.handleButton1(note.customerStatus,note.id)}</td>
                         
                          </tr>
                 );
@@ -186,6 +196,19 @@ import swal from "sweetalert";
             }
         });  
       
+    }
+    handleButton2(cs,id){
+        if(cs=="Not Processed"){
+            return(
+                <td><button onClick={() => this.handlePay(id)} > Pay </button></td>
+            );
+        }
+        else{
+            return(
+                <td></td>
+            );
+        }
+
     }
     renderResultNotification(){
       
@@ -204,7 +227,7 @@ import swal from "sweetalert";
                         <td >{note.owner}</td>
                         <td>{note.customerStatus}</td>
                         <td>{note.ownerStatus}</td>
-                        <td><button onClick={() => this.handlePay(note.id)} > Pay </button></td><td></td>
+                        <td>{this.handleButton2(note.customerStatus,note.id)}</td><td></td>
                          </tr>
                 );
             }

@@ -10,5 +10,6 @@
     margin-right: 20%;
     background-color:lightgray;
     padding:  20px;
-    box-shadow: 5px 5px 5px black;
+    box-shadow: 5px 5px 5px grey;
+    opacity: 0.9;
 }

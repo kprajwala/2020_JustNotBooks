@@ -11,6 +11,7 @@
 tr td{
     padding-top: 20px;
     vertical-align: middle;
+    
   }
 tr :hover{
       opacity:1;

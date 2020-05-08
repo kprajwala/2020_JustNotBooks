@@ -68,8 +68,11 @@ class Search extends React.Component {
               const templateId = 'template_Ne4ypnOa';
             this.sendFeedback(templateId, {message_html: "Thank you for purchasing!!", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
               //alert("Thank you for Purchasing!!")
-              swal("Thanks!!","Thank you for Purchasing!!","success");
-              window.location.reload(false)
+              swal({title: "Thanks!", text: "Thank you for purchasing!", icon: 
+                "success"}).then(function(){ 
+                    window.location.reload();
+                }
+            );
             }
           }) 
     
@@ -122,8 +125,13 @@ class Search extends React.Component {
                 const templateId = 'template_Ne4ypnOa';
                 this.sendFeedback(templateId, {message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
                 //alert("Thanks for Borrowing!! Return on time is appreciated..")
-                swal("Thanks!!","Thanks for Borrowing!! Return on time is appreciated..","success");
-                window.location.reload(false)
+                // swal("Thanks!!","Thanks for Borrowing!! Return on time is appreciated..","success");
+                // window.location.reload(false)
+                swal({title: "Thanks!", text: "Thanks for Borrowing!! Return on time is appreciated..", icon: 
+                "success"}).then(function(){ 
+                    window.location.reload();
+                }
+            );
               }
             }) 
           }
