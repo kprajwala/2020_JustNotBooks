@@ -1,0 +1,38 @@
+@import "https://www.w3schools.com/w3css/4/w3.css";
+.search{
+    margin-left:45%;
+    width: 50px;
+}
+
+.Table{
+    background-color: lightslategrey;
+    padding: 10px;
+}
+tr td{
+    padding-top: 20px;
+    vertical-align: middle;
+    
+  }
+tr :hover{
+      opacity:1;
+  }
+button:hover{
+    background-color:black;
+    color:white;
+}
+button{
+    padding: 15px 25px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  background-color:lightslategrey;
+  border: none;
+  border-radius: 15px;
+  
+}
+.tr:hover{
+   
+   transform: scale(1.01) ;
+}
